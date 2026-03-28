@@ -1,6 +1,6 @@
 ﻿namespace Escape_Room_Digital
 {
-    partial class MenuForm
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
