@@ -28,18 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnVolver = new Button();
             SuspendLayout();
+            // 
+            // btnVolver
+            // 
+            btnVolver.Font = new Font("Determination Mono Web", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnVolver.Location = new Point(1191, 33);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(94, 29);
+            btnVolver.TabIndex = 0;
+            btnVolver.Text = "Volver";
+            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
             // 
             // ConfiguracionUserControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
+            Controls.Add(btnVolver);
             Name = "ConfiguracionUserControl";
             Size = new Size(1366, 768);
             ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnVolver;
     }
 }

@@ -28,10 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            btnVolver = new Button();
+            SuspendLayout();
+            // 
+            // btnVolver
+            // 
+            btnVolver.Location = new Point(987, 36);
+            btnVolver.Name = "btnVolver";
+            btnVolver.Size = new Size(94, 29);
+            btnVolver.TabIndex = 0;
+            btnVolver.Text = "Volver";
+            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.Click += btnVolver_Click;
+            // 
+            // AdministradorUserControl
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaptionText;
+            Controls.Add(btnVolver);
+            Font = new Font("Determination Mono Web", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "AdministradorUserControl";
+            Size = new Size(1141, 588);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnVolver;
     }
 }

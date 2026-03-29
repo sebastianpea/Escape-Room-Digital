@@ -12,9 +12,19 @@ namespace Escape_Room_Digital.UserControls
 {
     public partial class AdministradorUserControl : UserControl
     {
+        private Form1 _form;
+        public void SetForm(Form1 form)
+        {
+            _form = form;
+        }
         public AdministradorUserControl()
         {
             InitializeComponent();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            _form.MostrarUserControl(new MenuUserControl());
         }
     }
 }
