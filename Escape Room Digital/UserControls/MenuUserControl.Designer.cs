@@ -38,50 +38,60 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.Font = new Font("Determination Mono Web", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.Control;
-            label1.Location = new Point(555, 187);
+            label1.Location = new Point(775, 450);
             label1.Name = "label1";
-            label1.Size = new Size(142, 15);
+            label1.Size = new Size(279, 29);
             label1.TabIndex = 0;
             label1.Text = "Escape Room Digital";
             // 
             // btnJugar
             // 
-            btnJugar.Location = new Point(586, 314);
+            btnJugar.BackColor = SystemColors.ActiveCaptionText;
+            btnJugar.ForeColor = SystemColors.Control;
+            btnJugar.Location = new Point(879, 621);
             btnJugar.Name = "btnJugar";
             btnJugar.Size = new Size(94, 29);
             btnJugar.TabIndex = 1;
             btnJugar.Text = "Jugar";
-            btnJugar.UseVisualStyleBackColor = true;
+            btnJugar.UseVisualStyleBackColor = false;
+            btnJugar.Click += btnJugar_Click;
             // 
             // btnConfiguración
             // 
-            btnConfiguración.Location = new Point(555, 379);
+            btnConfiguración.BackColor = SystemColors.ActiveCaptionText;
+            btnConfiguración.ForeColor = SystemColors.ButtonFace;
+            btnConfiguración.Location = new Point(932, 844);
             btnConfiguración.Name = "btnConfiguración";
             btnConfiguración.Size = new Size(151, 29);
             btnConfiguración.TabIndex = 2;
             btnConfiguración.Text = "Configuración";
-            btnConfiguración.UseVisualStyleBackColor = true;
+            btnConfiguración.UseVisualStyleBackColor = false;
             btnConfiguración.Click += btnConfiguración_Click;
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(20, 27);
+            btnSalir.BackColor = SystemColors.ActiveCaptionText;
+            btnSalir.ForeColor = SystemColors.ButtonFace;
+            btnSalir.Location = new Point(1715, 14);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(94, 38);
+            btnSalir.Size = new Size(133, 70);
             btnSalir.TabIndex = 3;
             btnSalir.Text = "Salir";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // btnAdministrador
             // 
-            btnAdministrador.Location = new Point(1170, 514);
+            btnAdministrador.BackColor = SystemColors.ActiveCaptionText;
+            btnAdministrador.ForeColor = SystemColors.Control;
+            btnAdministrador.Location = new Point(1749, 1006);
             btnAdministrador.Name = "btnAdministrador";
-            btnAdministrador.Size = new Size(94, 29);
+            btnAdministrador.Size = new Size(146, 57);
             btnAdministrador.TabIndex = 4;
             btnAdministrador.Text = "Administrador";
-            btnAdministrador.UseVisualStyleBackColor = true;
+            btnAdministrador.UseVisualStyleBackColor = false;
             btnAdministrador.Click += btnAdministrador_Click;
             // 
             // MenuUserControl
@@ -95,9 +105,10 @@
             Controls.Add(btnJugar);
             Controls.Add(label1);
             Font = new Font("Determination Mono Web", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = SystemColors.Control;
             Margin = new Padding(3, 2, 3, 2);
             Name = "MenuUserControl";
-            Size = new Size(1290, 574);
+            Size = new Size(1920, 1080);
             ResumeLayout(false);
             PerformLayout();
         }

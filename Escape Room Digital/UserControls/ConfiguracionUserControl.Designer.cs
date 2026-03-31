@@ -34,9 +34,9 @@
             // btnVolver
             // 
             btnVolver.Font = new Font("Determination Mono Web", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnVolver.Location = new Point(1191, 33);
+            btnVolver.Location = new Point(1696, 19);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(94, 29);
+            btnVolver.Size = new Size(149, 57);
             btnVolver.TabIndex = 0;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             BackColor = SystemColors.ActiveCaptionText;
             Controls.Add(btnVolver);
             Name = "ConfiguracionUserControl";
-            Size = new Size(1366, 768);
+            Size = new Size(1920, 1080);
             ResumeLayout(false);
         }
 

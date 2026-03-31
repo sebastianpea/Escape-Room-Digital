@@ -33,9 +33,9 @@
             // 
             // btnVolver
             // 
-            btnVolver.Location = new Point(987, 36);
+            btnVolver.Location = new Point(1709, 17);
             btnVolver.Name = "btnVolver";
-            btnVolver.Size = new Size(94, 29);
+            btnVolver.Size = new Size(140, 61);
             btnVolver.TabIndex = 0;
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             Font = new Font("Determination Mono Web", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(3, 2, 3, 2);
             Name = "AdministradorUserControl";
-            Size = new Size(1141, 588);
+            Size = new Size(1920, 1080);
             ResumeLayout(false);
         }
 
