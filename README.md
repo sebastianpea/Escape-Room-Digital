@@ -1,4 +1,4 @@
-# Escape Room Digital: Mazmorra 🏰门
+# Escape Room Digital: Mazmorra 🏰
 
 Un juego de aventura y acertijos desarrollado en **C#** utilizando **Windows Forms**. El objetivo es simple pero desafiante: encontrar la salida de una mazmorra resolviendo enigmas lógicos antes de que sea demasiado tarde.
 
