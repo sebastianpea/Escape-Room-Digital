@@ -1,18 +1,26 @@
-namespace Escape_Room_Digital
+using Escape_Room_Digital;
 
+namespace Escape_Room_Digital
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            try
+            {
+                ApplicationConfiguration.Initialize();
+                AudioManager.CargarPlaylist(new List<string> 
+                {
+                    "Audio/HipShop.mp3" 
+                });
+                AudioManager.ReproducirSiguiente();
+                Application.Run(new Form1());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}\n\n{ex.StackTrace}");
+            }
         }
     }
 }

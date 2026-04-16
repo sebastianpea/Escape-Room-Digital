@@ -26,5 +26,15 @@ namespace Escape_Room_Digital.UserControls
         {
             _form.MostrarUserControl(new MenuUserControl());
         }
+
+        private void btnVolver_MouseEnter(object sender, EventArgs e)
+        {
+            btnVolver.ForeColor = Color.Yellow;
+        }
+
+        private void btnVolver_MouseLeave(object sender, EventArgs e)
+        {
+            btnVolver.ForeColor = Color.White;
+        }
     }
 }

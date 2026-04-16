@@ -33,12 +33,47 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnConfiguración_Click(object sender, EventArgs e)
         {
-            _form.MostrarUserControl(new AdministradorUserControl());
+            _form.MostrarUserControl(new ConfiguracionUserControl());
         }
-
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
             _form.MostrarUserControl(new AdministradorUserControl());
+        }
+        private void btnJugar_MouseEnter(object sender, EventArgs e)
+        {
+            btnJugar.ForeColor = Color.Yellow;
+        }
+        private void btnJugar_MouseLeave(object sender, EventArgs e)
+        {
+            btnJugar.ForeColor = Color.White;
+        }
+        private void btnConfiguración_MouseEnter(object sender, EventArgs e)
+        {
+            btnConfiguración.ForeColor = Color.Yellow;
+        }
+        private void btnConfiguración_MouseLeave(object sender, EventArgs e)
+        {
+            btnConfiguración.ForeColor = Color.White;
+        }
+
+        private void btnSalir_MouseEnter(object sender, EventArgs e)
+        {
+            btnSalir.ForeColor = Color.Yellow;
+        }
+
+        private void btnSalir_MouseLeave(object sender, EventArgs e)
+        {
+            btnSalir.ForeColor = Color.White;
+        }
+
+        private void btnAdministrador_MouseEnter(object sender, EventArgs e)
+        {
+            btnAdministrador.ForeColor = Color.Yellow;
+        }
+
+        private void btnAdministrador_MouseLeave(object sender, EventArgs e)
+        {
+            btnAdministrador.ForeColor = Color.White;
         }
     }
 }

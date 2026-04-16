@@ -8,6 +8,6 @@ namespace Escape_Room_Digital
 {
     interface IResoluble
     {
-        bool Resolver (string respuesta);
+        bool ResolverRespuesta (string respuesta);
     }
 }

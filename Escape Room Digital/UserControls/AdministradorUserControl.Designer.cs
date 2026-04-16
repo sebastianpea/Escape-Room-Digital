@@ -33,13 +33,18 @@
             // 
             // btnVolver
             // 
+            btnVolver.BackColor = SystemColors.ActiveCaptionText;
+            btnVolver.Font = new Font("Determination Mono Web", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnVolver.ForeColor = SystemColors.ButtonFace;
             btnVolver.Location = new Point(1709, 17);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(140, 61);
             btnVolver.TabIndex = 0;
             btnVolver.Text = "Volver";
-            btnVolver.UseVisualStyleBackColor = true;
+            btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
+            btnVolver.MouseEnter += btnVolver_MouseEnter;
+            btnVolver.MouseLeave += btnVolver_MouseLeave;
             // 
             // AdministradorUserControl
             // 

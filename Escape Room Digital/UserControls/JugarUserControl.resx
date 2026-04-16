@@ -121,7 +121,7 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="timerMoverAbajo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>642, 9</value>
+    <value>642, 14</value>
   </metadata>
   <metadata name="timerMoverIzquierda.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>450, 11</value>
