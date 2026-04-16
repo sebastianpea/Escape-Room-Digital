@@ -10,7 +10,6 @@ namespace Escape_Room_Digital.UserControls
         private Form1 _form1;
         int segundosRestantes = 300;
 
-        // ── Animación ──
         private int frameActual = 0;
         private Image[] framesActuales;
         private Image[] framesAnimacionAbajo;
@@ -18,24 +17,23 @@ namespace Escape_Room_Digital.UserControls
         private Image[] framesAnimacionDerecha;
         private Image[] framesAnimacionIzquierda;
 
-        // ── Movimiento por celdas ──
+
         private int tamCelda = 75;
         private bool moviendose = false;
 
-        // ── Posiciones lógicas (en celdas, no píxeles) ──
+        //celdas no pixeles
         private int jugadorCeldaX, jugadorCeldaY;
         private Dictionary<PictureBox, (int x, int y)> posicionCeldas = new Dictionary<PictureBox, (int, int)>();
 
-        // ── Posiciones iniciales para reiniciar ──
+
         private Dictionary<PictureBox, (int x, int y)> posicionesIniciales = new Dictionary<PictureBox, (int, int)>();
         private (int x, int y) jugadorInicial;
 
-        // ── Listas ──
+
         private List<PictureBox> cajas = new List<PictureBox>();
         private List<PictureBox> metas = new List<PictureBox>();
         private List<PictureBox> paredes = new List<PictureBox>();
 
-        // ── Animación de deslizamiento ──
         private PictureBox cajaAnimando = null;
         private int animPasos = 0;
         private int animPasosTotales = 8;
@@ -132,11 +130,6 @@ namespace Escape_Room_Digital.UserControls
             pbJugador.BringToFront();
         }
 
-        // ──────────────────────────────────────────
-        //  HELPERS
-        // ──────────────────────────────────────────
-
-        // Verifica si una celda cae dentro del área de un PictureBox
         private bool CeldaChocaConControl(int celdaX, int celdaY, PictureBox pb)
         {
             int px = celdaX * tamCelda;
@@ -171,9 +164,6 @@ namespace Escape_Room_Digital.UserControls
             pbJugador.BringToFront();
         }
 
-        // ──────────────────────────────────────────
-        //  TECLAS
-        // ──────────────────────────────────────────
         public void HabilitarTeclas(Keys tecla, bool presionada)
         {
             if (!presionada || moviendose) return;
@@ -206,19 +196,17 @@ namespace Escape_Room_Digital.UserControls
                 pbJugador.Image = framesActuales[0];
         }
 
-        // ──────────────────────────────────────────
-        //  LÓGICA DE MOVIMIENTO
-        // ──────────────────────────────────────────
+
         private void IntentarMover(int dx, int dy)
         {
             int nuevaX = jugadorCeldaX + dx;
             int nuevaY = jugadorCeldaY + dy;
 
-            // ¿Hay pared? — funciona con paredes de cualquier tamaño
+            // Hay pared?
             foreach (var pared in paredes)
                 if (CeldaChocaConControl(nuevaX, nuevaY, pared)) return;
 
-            // ¿Hay caja?
+            // Hay caja?
             PictureBox cajaEncontrada = null;
             foreach (var caja in cajas)
             {
@@ -235,11 +223,11 @@ namespace Escape_Room_Digital.UserControls
                 int cajaNuevaX = nuevaX + dx;
                 int cajaNuevaY = nuevaY + dy;
 
-                // ¿La caja choca con pared? — funciona con paredes de cualquier tamaño
+                // La caja choca con pared?
                 foreach (var pared in paredes)
                     if (CeldaChocaConControl(cajaNuevaX, cajaNuevaY, pared)) return;
 
-                // ¿La caja choca con otra caja?
+                // La caja choca con otra caja?
                 foreach (var otraCaja in cajas)
                 {
                     if (otraCaja == cajaEncontrada) continue;
@@ -264,9 +252,6 @@ namespace Escape_Room_Digital.UserControls
             timerAnimacion.Start();
         }
 
-        // ──────────────────────────────────────────
-        //  TIMERS
-        // ──────────────────────────────────────────
         private void timerMovimiento_Tick(object sender, EventArgs e)
         {
             pbJugador.Left += jugadorDxPixel;
@@ -308,9 +293,7 @@ namespace Escape_Room_Digital.UserControls
             pbJugador.Image = framesActuales[frameActual];
         }
 
-        // ──────────────────────────────────────────
-        //  VICTORIA
-        // ──────────────────────────────────────────
+
         private void VerificarVictoria()
         {
             int cajasEnMeta = 0;
@@ -345,9 +328,7 @@ namespace Escape_Room_Digital.UserControls
                 btnOkShortSkeleton.Visible = false;
             }
         }
-        // ──────────────────────────────────────────
-        //  BOTONES
-        // ──────────────────────────────────────────
+
         private void btnReiniciar_Click(object sender, EventArgs e)
         {
             moviendose = false;

@@ -268,4 +268,7 @@
   <data name="ParedImage6x1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Diseño sin título(14).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PapyrusGif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3ce7cd36cd3152452231ef9e46b4b14e.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

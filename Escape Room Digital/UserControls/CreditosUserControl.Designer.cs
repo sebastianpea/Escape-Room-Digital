@@ -31,6 +31,8 @@
             btnSalir = new Button();
             lblPuntuacion = new Label();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnSalir
@@ -75,10 +77,20 @@
             label1.TabIndex = 6;
             label1.Text = "Gracias por Jugar!";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.PapyrusGif;
+            pictureBox1.Location = new Point(401, 784);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(412, 267);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
             // CreditosUserControl
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaptionText;
+            Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(lblPuntuacion);
             Controls.Add(btnSalir);
@@ -87,6 +99,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "CreditosUserControl";
             Size = new Size(1920, 1080);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,5 +109,6 @@
         private Button btnSalir;
         private Label lblPuntuacion;
         private Label label1;
+        private PictureBox pictureBox1;
     }
 }

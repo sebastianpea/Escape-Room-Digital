@@ -637,9 +637,9 @@
             lblDialogoShortSkeleton.ForeColor = SystemColors.ButtonFace;
             lblDialogoShortSkeleton.Location = new Point(246, 32);
             lblDialogoShortSkeleton.Name = "lblDialogoShortSkeleton";
-            lblDialogoShortSkeleton.Size = new Size(538, 60);
+            lblDialogoShortSkeleton.Size = new Size(538, 90);
             lblDialogoShortSkeleton.TabIndex = 0;
-            lblDialogoShortSkeleton.Text = "Ups!, se te acabó el tiempo, suerte\r\npara la próxima";
+            lblDialogoShortSkeleton.Text = "Ups!, se te acabó el tiempo, suerte\r\npara la próxima\r\nEscape Room Digital";
             // 
             // label2
             // 
