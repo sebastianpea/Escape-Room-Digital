@@ -111,8 +111,6 @@
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
-            btnVolver.MouseEnter += btnVolver_MouseEnter;
-            btnVolver.MouseLeave += btnVolver_MouseLeave;
             // 
             // pbJugador
             // 
@@ -232,8 +230,6 @@
             btnOkNerd.UseVisualStyleBackColor = false;
             btnOkNerd.Visible = false;
             btnOkNerd.Click += btnOkNerd_Click;
-            btnOkNerd.MouseEnter += btnOkNerd_MouseEnter;
-            btnOkNerd.MouseLeave += btnOkNerd_MouseLeave;
             // 
             // pictureBox4
             // 
@@ -257,8 +253,6 @@
             btnNoNerd.Text = "No";
             btnNoNerd.UseVisualStyleBackColor = false;
             btnNoNerd.Click += btnNoNerd_Click;
-            btnNoNerd.MouseEnter += btnNoNerd_MouseEnter;
-            btnNoNerd.MouseLeave += btnNoNerd_MouseLeave;
             // 
             // btnSiNerd
             // 
@@ -271,8 +265,6 @@
             btnSiNerd.Text = "Si";
             btnSiNerd.UseVisualStyleBackColor = false;
             btnSiNerd.Click += btnSiNerd_Click;
-            btnSiNerd.MouseEnter += btnSiNerd_MouseEnter;
-            btnSiNerd.MouseLeave += btnSiNerd_MouseLeave;
             // 
             // lblDialogoNerd
             // 
@@ -312,8 +304,6 @@
             btnOkShortSkeleton.UseVisualStyleBackColor = false;
             btnOkShortSkeleton.Visible = false;
             btnOkShortSkeleton.Click += btnOkShortSkeleton_Click;
-            btnOkShortSkeleton.MouseEnter += btnOkShortSkeleton_MouseEnter;
-            btnOkShortSkeleton.MouseLeave += btnOkShortSkeleton_MouseLeave;
             // 
             // pictureBox1
             // 
@@ -337,8 +327,6 @@
             btnNoShortSkeleton.Text = "No";
             btnNoShortSkeleton.UseVisualStyleBackColor = false;
             btnNoShortSkeleton.Click += btnNoShortSkeleton_Click;
-            btnNoShortSkeleton.MouseEnter += btnNoShortSkeleton_MouseEnter;
-            btnNoShortSkeleton.MouseLeave += btnNoShortSkeleton_MouseLeave;
             // 
             // btnSiShortSkeleton
             // 
@@ -351,8 +339,6 @@
             btnSiShortSkeleton.Text = "Si";
             btnSiShortSkeleton.UseVisualStyleBackColor = false;
             btnSiShortSkeleton.Click += btnSiShortSkeleton_Click;
-            btnSiShortSkeleton.MouseEnter += btnSiShortSkeleton_MouseEnter;
-            btnSiShortSkeleton.MouseLeave += btnSiShortSkeleton_MouseLeave;
             // 
             // lblDialogoShortSkeleton
             // 
@@ -392,8 +378,6 @@
             btnOkGhost.UseVisualStyleBackColor = false;
             btnOkGhost.Visible = false;
             btnOkGhost.Click += btnOkGhost_Click;
-            btnOkGhost.MouseEnter += btnOkGhost_MouseEnter;
-            btnOkGhost.MouseLeave += btnOkGhost_MouseLeave;
             // 
             // pictureBox3
             // 
@@ -417,8 +401,6 @@
             btnNoGhost.Text = "No";
             btnNoGhost.UseVisualStyleBackColor = false;
             btnNoGhost.Click += btnNoGhost_Click;
-            btnNoGhost.MouseEnter += btnNoGhost_MouseEnter;
-            btnNoGhost.MouseLeave += btnNoGhost_MouseLeave;
             // 
             // btnSiGhost
             // 
@@ -431,8 +413,6 @@
             btnSiGhost.Text = "Si";
             btnSiGhost.UseVisualStyleBackColor = false;
             btnSiGhost.Click += btnSiGhost_Click;
-            btnSiGhost.MouseEnter += btnSiGhost_MouseEnter;
-            btnSiGhost.MouseLeave += btnSiGhost_MouseLeave;
             // 
             // lblDialogoGhost
             // 
@@ -474,8 +454,6 @@
             btnOkJester.UseVisualStyleBackColor = false;
             btnOkJester.Visible = false;
             btnOkJester.Click += btnOkJester_Click;
-            btnOkJester.MouseEnter += btnJesterOk_MouseEnter;
-            btnOkJester.MouseLeave += btnJesterOk_MouseLeave;
             // 
             // pictureBox2
             // 
@@ -499,8 +477,6 @@
             btnNoJester.Text = "No";
             btnNoJester.UseVisualStyleBackColor = false;
             btnNoJester.Click += btnNoJester_Click;
-            btnNoJester.MouseEnter += btnNoJester_MouseEnter;
-            btnNoJester.MouseLeave += btnNoJester_MouseLeave;
             // 
             // btnSiJester
             // 
@@ -513,8 +489,6 @@
             btnSiJester.Text = "Si";
             btnSiJester.UseVisualStyleBackColor = false;
             btnSiJester.Click += btnSiJester_Click;
-            btnSiJester.MouseEnter += btnSiJester_MouseEnter;
-            btnSiJester.MouseLeave += btnSiJester_MouseLeave;
             // 
             // lblDialogoJester
             // 
@@ -613,8 +587,6 @@
             btnContinuarTurtle.UseVisualStyleBackColor = false;
             btnContinuarTurtle.Visible = false;
             btnContinuarTurtle.Click += btnContinuarTurtle_Click;
-            btnContinuarTurtle.MouseEnter += btnContinuarTurtle_MouseEnter;
-            btnContinuarTurtle.MouseLeave += btnContinuarTurtle_MouseLeave;
             // 
             // pbTurtlePanel
             // 
@@ -638,8 +610,6 @@
             btnOkTurtle.Text = "OK";
             btnOkTurtle.UseVisualStyleBackColor = false;
             btnOkTurtle.Click += btnOkTurtle_Click;
-            btnOkTurtle.MouseEnter += btnOkTurtle_MouseEnter;
-            btnOkTurtle.MouseLeave += btnOkTurtle_MouseLeave;
             // 
             // lblTurtle
             // 

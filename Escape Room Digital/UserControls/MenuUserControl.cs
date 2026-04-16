@@ -21,6 +21,7 @@ namespace Escape_Room_Digital.UserControls
         public MenuUserControl()
         {
             InitializeComponent();
+            RegistrarHoverBotones(btnJugar, btnConfiguración, btnSalir, btnAdministrador);
         }
         private void btnJugar_Click(object sender, EventArgs e)
         {
@@ -39,41 +40,13 @@ namespace Escape_Room_Digital.UserControls
         {
             _form.MostrarUserControl(new AdministradorUserControl());
         }
-        private void btnJugar_MouseEnter(object sender, EventArgs e)
+        private void RegistrarHoverBotones(params Button[] botones)
         {
-            btnJugar.ForeColor = Color.Yellow;
-        }
-        private void btnJugar_MouseLeave(object sender, EventArgs e)
-        {
-            btnJugar.ForeColor = Color.White;
-        }
-        private void btnConfiguración_MouseEnter(object sender, EventArgs e)
-        {
-            btnConfiguración.ForeColor = Color.Yellow;
-        }
-        private void btnConfiguración_MouseLeave(object sender, EventArgs e)
-        {
-            btnConfiguración.ForeColor = Color.White;
-        }
-
-        private void btnSalir_MouseEnter(object sender, EventArgs e)
-        {
-            btnSalir.ForeColor = Color.Yellow;
-        }
-
-        private void btnSalir_MouseLeave(object sender, EventArgs e)
-        {
-            btnSalir.ForeColor = Color.White;
-        }
-
-        private void btnAdministrador_MouseEnter(object sender, EventArgs e)
-        {
-            btnAdministrador.ForeColor = Color.Yellow;
-        }
-
-        private void btnAdministrador_MouseLeave(object sender, EventArgs e)
-        {
-            btnAdministrador.ForeColor = Color.White;
+            foreach (var btn in botones)
+            {
+                btn.MouseEnter += (s, e) => btn.ForeColor = Color.Yellow;
+                btn.MouseLeave += (s, e) => btn.ForeColor = Color.White;
+            }
         }
     }
 }

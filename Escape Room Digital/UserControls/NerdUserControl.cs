@@ -25,12 +25,15 @@ namespace Escape_Room_Digital.UserControls
             );
             lblAcertijo.Text = _acertijo.Pregunta;
             lblIntentos.Text = $"Intentos: {_acertijo.Intentos}";
+            RegistrarHoverBotones(btnValidar, btnContinuarRight, btnContinuarFail, btnVolver);
         }
 
         private void btnValidar_Click(object sender, EventArgs e)
         {
             timerCronómetro.Stop();
+            int intentosAntes = _acertijo.Intentos;
             Validar(txtRespuesta.Text);
+            if (_acertijo.Intentos > 0 && _acertijo.Intentos < intentosAntes)
             lblIntentos.Text = $"Intentos: {_acertijo.Intentos}";
         }
 
@@ -82,18 +85,8 @@ namespace Escape_Room_Digital.UserControls
 
         private void pnlNerd_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
+            DibujarBorde(e, pnlNerd);
 
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlNerd.ClientSize.Width - grosor,
-                    pnlNerd.ClientSize.Height - grosor);
-            }
         }
 
         private void btnContinuarFail_Click(object sender, EventArgs e)
@@ -104,58 +97,27 @@ namespace Escape_Room_Digital.UserControls
 
         private void pnlNerdIncorrecto_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
+            DibujarBorde(e, pnlNerdIncorrecto);
 
-            using (Pen pen = new Pen(colorBorde, grosor))
+        }
+        private void RegistrarHoverBotones(params Button[] botones)
+        {
+            foreach (var btn in botones)
             {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlNerdIncorrecto.ClientSize.Width - grosor,
-                    pnlNerdIncorrecto.ClientSize.Height - grosor);
+                btn.MouseEnter += (s, e) => btn.ForeColor = Color.Yellow;
+                btn.MouseLeave += (s, e) => btn.ForeColor = Color.White;
             }
         }
-
-        private void btnValidar_MouseEnter(object sender, EventArgs e)
+        private void DibujarBorde(PaintEventArgs e, Panel panel)
         {
-            btnValidar.ForeColor = Color.Yellow;
-        }
-
-        private void btnValidar_MouseLeave(object sender, EventArgs e)
-        {
-            btnValidar.ForeColor = Color.White;
-        }
-
-        private void btnContinuarRight_MouseEnter(object sender, EventArgs e)
-        {
-            btnContinuarRight.ForeColor = Color.Yellow;
-        }
-
-        private void btnContinuarRight_MouseLeave(object sender, EventArgs e)
-        {
-            btnContinuarRight.ForeColor = Color.White;
-        }
-
-        private void btnContinuarFail_MouseEnter(object sender, EventArgs e)
-        {
-            btnContinuarFail.ForeColor = Color.Yellow;
-        }
-
-        private void btnContinuarFail_MouseLeave(object sender, EventArgs e)
-        {
-            btnContinuarFail.ForeColor = Color.White;
-        }
-
-        private void btnVolver_MouseEnter(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor= Color.Yellow;
-        }
-
-        private void btnVolver_MouseLeave(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor = Color.White;
+            int grosor = 3;
+            using (Pen pen = new Pen(Color.White, grosor))
+            {
+                int offset = grosor / 2;
+                e.Graphics.DrawRectangle(pen, offset, offset,
+                    panel.ClientSize.Width - grosor,
+                    panel.ClientSize.Height - grosor);
+            }
         }
     }
 }

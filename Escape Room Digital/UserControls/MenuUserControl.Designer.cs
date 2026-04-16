@@ -62,8 +62,6 @@
             btnJugar.Text = "Jugar";
             btnJugar.UseVisualStyleBackColor = false;
             btnJugar.Click += btnJugar_Click;
-            btnJugar.MouseEnter += btnJugar_MouseEnter;
-            btnJugar.MouseLeave += btnJugar_MouseLeave;
             // 
             // btnConfiguración
             // 
@@ -81,8 +79,6 @@
             btnConfiguración.Text = "Configuración";
             btnConfiguración.UseVisualStyleBackColor = false;
             btnConfiguración.Click += btnConfiguración_Click;
-            btnConfiguración.MouseEnter += btnConfiguración_MouseEnter;
-            btnConfiguración.MouseLeave += btnConfiguración_MouseLeave;
             // 
             // btnSalir
             // 
@@ -100,8 +96,6 @@
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
-            btnSalir.MouseEnter += btnSalir_MouseEnter;
-            btnSalir.MouseLeave += btnSalir_MouseLeave;
             // 
             // btnAdministrador
             // 
@@ -119,8 +113,6 @@
             btnAdministrador.Text = "Administrador";
             btnAdministrador.UseVisualStyleBackColor = false;
             btnAdministrador.Click += btnAdministrador_Click;
-            btnAdministrador.MouseEnter += btnAdministrador_MouseEnter;
-            btnAdministrador.MouseLeave += btnAdministrador_MouseLeave;
             // 
             // MenuUserControl
             // 

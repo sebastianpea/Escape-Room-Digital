@@ -79,6 +79,12 @@ namespace Escape_Room_Digital.UserControls
                 Properties.Resources.SkeletonLeftWalk4,
                 Properties.Resources.SkeletonLeftWalk3
             };
+            RegistrarHoverBotones(
+    btnVolver, btnOkTurtle, btnSiGhost, btnNoGhost,
+    btnSiShortSkeleton, btnNoShortSkeleton, btnSiNerd, btnNoNerd,
+    btnSiJester, btnNoJester, btnOkNerd, btnOkJester,
+    btnOkGhost, btnOkShortSkeleton, btnContinuarTurtle
+);
         }
         private void CambiarFramesAnimacion(Image[] frames)
         {
@@ -113,70 +119,17 @@ namespace Escape_Room_Digital.UserControls
                 {
                     DetenerMovimiento();
                     if (objetoCercano is NPC_Nerd)
-                        if (EstadoDeJuego.NivelNerdCompletado == true)
-                        {
-                            lblDialogoNerd.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
-                            btnSiNerd.Visible = false;
-                            btnNoNerd.Visible = false;
-                            btnOkNerd.Visible = true;
-                            pnlDialogoNerd.Visible = true;
-                            pnlDialogoNerd.BringToFront();
-                        }
-
-                        else
-                        {
-                            lblDialogoNerd.Text = objetoCercano.TextoDialogo;
-                            pnlDialogoNerd.Visible = true;
-                            pnlDialogoNerd.BringToFront();
-                        }
+                        MostrarDialogoNPC(pnlDialogoNerd, lblDialogoNerd, btnSiNerd, btnNoNerd, btnOkNerd,
+                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelNerdCompletado);
                     else if (objetoCercano is NPC_Jester)
-                        if (EstadoDeJuego.NivelJesterCompletado == true)
-                        {
-                            lblDialogoJester.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
-                            btnSiJester.Visible = false;
-                            btnNoJester.Visible = false;
-                            btnOkJester.Visible = true;
-                            pnlDialogoJester.Visible = true;
-                            pnlDialogoJester.BringToFront();
-                        }
-                        else
-                        {
-                            lblDialogoJester.Text = objetoCercano.TextoDialogo;
-                            pnlDialogoJester.Visible = true;
-                            pnlDialogoJester.BringToFront();
-                        }
+                        MostrarDialogoNPC(pnlDialogoJester, lblDialogoJester, btnSiJester, btnNoJester, btnOkJester,
+                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelJesterCompletado);
                     else if (objetoCercano is NPC_Ghost)
-                        if (EstadoDeJuego.NivelGhostCompletado == true)
-                        {
-                            lblDialogoGhost.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
-                            btnSiGhost.Visible = false;
-                            btnNoGhost.Visible = false;
-                            btnOkGhost.Visible = true;
-                            pnlDialogoGhost.Visible = true;
-                            pnlDialogoGhost.BringToFront();
-                        }
-                        else
-                        {
-                            lblDialogoGhost.Text = objetoCercano.TextoDialogo;
-                            pnlDialogoGhost.Visible = true;
-                            pnlDialogoGhost.BringToFront();
-                        }
+                        MostrarDialogoNPC(pnlDialogoGhost, lblDialogoGhost, btnSiGhost, btnNoGhost, btnOkGhost,
+                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelGhostCompletado);
                     else if (objetoCercano is NPC_ShortSkeleton)
-                        if (EstadoDeJuego.NivelShortSkeletonCompletado == true)
-                        {
-                            lblDialogoShortSkeleton.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
-                            btnSiShortSkeleton.Visible = false;
-                            btnNoShortSkeleton.Visible = false;
-                            btnOkShortSkeleton.Visible = true;
-                            pnlDialogoShortSkeleton.Visible = true;
-                            pnlDialogoShortSkeleton.BringToFront();
-                        }
-                        else
-                        {
-                            lblDialogoShortSkeleton.Text = objetoCercano.TextoDialogo;
-                            pnlDialogoShortSkeleton.Visible = true;
-                            pnlDialogoShortSkeleton.BringToFront();
-                        }
+                        MostrarDialogoNPC(pnlDialogoShortSkeleton, lblDialogoShortSkeleton, btnSiShortSkeleton, btnNoShortSkeleton, btnOkShortSkeleton,
+                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelShortSkeletonCompletado);
                     else if (objetoCercano is NPC_Turtle)
                     {
                         if (EstadoDeJuego.cantidadNivelesCompletados >= 4)
@@ -238,10 +191,7 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnNoNerd_Click(object sender, EventArgs e)
         {
-            pnlDialogoNerd.Visible = false;
-            btnNoNerd.TabStop = false;
-            _form.Select();
-
+            CerrarDialogo(pnlDialogoNerd, btnNoNerd);
         }
 
         // Jester
@@ -254,9 +204,7 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnNoJester_Click(object sender, EventArgs e)
         {
-            pnlDialogoJester.Visible = false;
-            btnNoJester.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoJester, btnNoJester);
         }
 
         // Ghost
@@ -269,9 +217,7 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnNoGhost_Click(object sender, EventArgs e)
         {
-            pnlDialogoGhost.Visible = false;
-            btnNoGhost.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoGhost, btnNoGhost);
         }
 
         // ShortSkeleton
@@ -284,9 +230,7 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnNoShortSkeleton_Click(object sender, EventArgs e)
         {
-            pnlDialogoShortSkeleton.Visible = false;
-            btnNoShortSkeleton.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoShortSkeleton, btnNoShortSkeleton);
         }
 
         public void btnVolver_Click(object sender, EventArgs e)
@@ -371,82 +315,27 @@ namespace Escape_Room_Digital.UserControls
 
         private void pnlDialogoJester_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlDialogoJester.ClientSize.Width - grosor,
-                    pnlDialogoJester.ClientSize.Height - grosor);
-            }
+            DibujarBorde(e, pnlDialogoJester);
         }
 
         private void pnlDialogoGhost_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlDialogoGhost.ClientSize.Width - grosor,
-                    pnlDialogoGhost.ClientSize.Height - grosor);
-            }
+            DibujarBorde(e, pnlDialogoGhost);
         }
 
         private void pnlDialogoShortSkeleton_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlDialogoShortSkeleton.ClientSize.Width - grosor,
-                    pnlDialogoShortSkeleton.ClientSize.Height - grosor);
-            }
+            DibujarBorde(e, pnlDialogoShortSkeleton);
         }
 
         private void pnlDialogoNerd_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlDialogoNerd.ClientSize.Width - grosor,
-                    pnlDialogoNerd.ClientSize.Height - grosor);
-            }
+            DibujarBorde(e, pnlDialogoNerd);
         }
 
         private void pnlTurtle_Paint(object sender, PaintEventArgs e)
         {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlTurtle.ClientSize.Width - grosor,
-                    pnlTurtle.ClientSize.Height - grosor);
-            }
+            DibujarBorde(e, pnlTurtle);
         }
 
         private void btnOkTurtle_Click(object sender, EventArgs e)
@@ -475,187 +364,72 @@ namespace Escape_Room_Digital.UserControls
             EstadoDeJuego.VecesPresionado++;
 
         }
-
-        private void btnVolver_MouseEnter(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor = Color.Yellow;
-        }
-
-        private void btnVolver_MouseLeave(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor = Color.White;
-        }
-
-        private void btnOkTurtle_MouseEnter(object sender, EventArgs e)
-        {
-            btnOkTurtle.ForeColor = Color.Yellow;
-        }
-
-        private void btnOkTurtle_MouseLeave(object sender, EventArgs e)
-        {
-            btnOkTurtle.ForeColor = Color.White;
-        }
-
-        private void btnSiGhost_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiGhost.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiGhost_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiGhost.ForeColor = Color.White;
-        }
-
-        private void btnNoGhost_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoGhost.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoGhost_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoGhost.ForeColor = Color.White;
-        }
-
-        private void btnSiShortSkeleton_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiShortSkeleton.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiShortSkeleton_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiShortSkeleton.ForeColor = Color.White;
-        }
-
-        private void btnNoShortSkeleton_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoShortSkeleton.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoShortSkeleton_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoShortSkeleton.ForeColor = Color.White;
-        }
-
-        private void btnSiNerd_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiNerd.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiNerd_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiNerd.ForeColor = Color.White;
-        }
-
-        private void btnNoNerd_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoNerd.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoNerd_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoNerd.ForeColor = Color.White;
-        }
-
-        private void btnSiJester_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiJester.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiJester_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiJester.ForeColor = Color.White;
-        }
-
-        private void btnNoJester_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoJester.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoJester_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoJester.ForeColor = Color.White;
-        }
-
         private void btnOkNerd_Click(object sender, EventArgs e)
         {
-            pnlDialogoNerd.Visible = false;
-            btnOkNerd.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoNerd, btnOkNerd);
         }
-
-        private void btnOkNerd_MouseEnter(object sender, EventArgs e)
-        {
-            btnOkNerd.ForeColor = Color.Yellow;
-        }
-
-        private void btnOkNerd_MouseLeave(object sender, EventArgs e)
-        {
-            btnOkNerd.ForeColor = Color.White;
-        }
-
-        private void btnJesterOk_MouseEnter(object sender, EventArgs e)
-        {
-            btnOkJester.ForeColor = Color.Yellow;
-        }
-
-        private void btnJesterOk_MouseLeave(object sender, EventArgs e)
-        {
-            btnOkJester.ForeColor = Color.White;
-        }
-
-        private void btnOkGhost_MouseEnter(object sender, EventArgs e)
-        {
-            btnOkGhost.ForeColor = Color.Yellow;
-        }
-
-        private void btnOkGhost_MouseLeave(object sender, EventArgs e)
-        {
-            btnOkGhost.ForeColor = Color.White;
-        }
-
-        private void btnOkShortSkeleton_MouseEnter(object sender, EventArgs e)
-        {
-            btnOkShortSkeleton.ForeColor = Color.Yellow;
-        }
-
-        private void btnOkShortSkeleton_MouseLeave(object sender, EventArgs e)
-        {
-            btnOkShortSkeleton.ForeColor = Color.White;
-        }
-
         private void btnOkGhost_Click(object sender, EventArgs e)
         {
-            pnlDialogoGhost.Visible = false;
-            btnOkGhost.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoGhost, btnOkGhost);
         }
         private void btnOkJester_Click(object sender, EventArgs e)
         {
-            pnlDialogoJester.Visible = false;
-            btnOkJester.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoJester, btnOkJester);
         }
 
         private void btnOkShortSkeleton_Click(object sender, EventArgs e)
         {
-            pnlDialogoShortSkeleton.Visible = false;
-            btnOkShortSkeleton.TabStop = false;
-            _form.Select();
+            CerrarDialogo(pnlDialogoShortSkeleton, btnOkShortSkeleton);
         }
 
         private void btnContinuarTurtle_Click(object sender, EventArgs e)
         {
             _form.MostrarUserControl(new CreditosUserControl());
         }
-
-        private void btnContinuarTurtle_MouseEnter(object sender, EventArgs e)
+        private void DibujarBorde(PaintEventArgs e, Panel panel)
         {
-            btnContinuarTurtle.ForeColor = Color.Yellow;
+            int grosor = 3;
+            using (Pen pen = new Pen(Color.White, grosor))
+            {
+                int offset = grosor / 2;
+                e.Graphics.DrawRectangle(pen, offset, offset,
+                    panel.ClientSize.Width - grosor,
+                    panel.ClientSize.Height - grosor);
+            }
+        }
+        private void RegistrarHoverBotones(params Button[] botones)
+        {
+            foreach (var btn in botones)
+            {
+                btn.MouseEnter += (s, e) => btn.ForeColor = Color.Yellow;
+                btn.MouseLeave += (s, e) => btn.ForeColor = Color.White;
+            }
+        }
+        private void MostrarDialogoNPC(Panel panel, Label label, Button btnSi, Button btnNo, Button btnOk, string textoDialogo, bool nivelCompletado)
+        {
+            if (nivelCompletado)
+            {
+                label.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
+                btnSi.Visible = false;
+                btnNo.Visible = false;
+                btnOk.Visible = true;
+            }
+            else
+            {
+                label.Text = textoDialogo;
+                btnSi.Visible = true;
+                btnNo.Visible = true;
+                btnOk.Visible = false;
+            }
+            panel.Visible = true;
+            panel.BringToFront();
+        }
+        private void CerrarDialogo(Panel panel, Button btnOk)
+        {
+            panel.Visible = false;
+            btnOk.TabStop = false;
+            _form.Select();
         }
 
-        private void btnContinuarTurtle_MouseLeave(object sender, EventArgs e)
-        {
-            btnContinuarTurtle.ForeColor = Color.White;
-        }
     }
 }

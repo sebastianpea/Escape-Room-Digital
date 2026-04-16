@@ -69,8 +69,6 @@
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
-            btnVolver.MouseEnter += btnVolver_MouseEnter;
-            btnVolver.MouseLeave += btnVolver_MouseLeave;
             // 
             // lblAcertijo
             // 
@@ -102,8 +100,6 @@
             btnValidar.Text = "Validar";
             btnValidar.UseVisualStyleBackColor = false;
             btnValidar.Click += btnValidar_Click;
-            btnValidar.MouseEnter += btnValidar_MouseEnter;
-            btnValidar.MouseLeave += btnValidar_MouseLeave;
             // 
             // txtRespuesta
             // 
@@ -248,8 +244,6 @@
             btnContinuarRight.Text = "Continuar";
             btnContinuarRight.UseVisualStyleBackColor = false;
             btnContinuarRight.Click += btnContinuarRight_Click;
-            btnContinuarRight.MouseEnter += btnContinuarRight_MouseEnter;
-            btnContinuarRight.MouseLeave += btnContinuarRight_MouseLeave;
             // 
             // lblDialogoNerd
             // 
@@ -296,8 +290,6 @@
             btnContinuarFail.Text = "Continuar";
             btnContinuarFail.UseVisualStyleBackColor = false;
             btnContinuarFail.Click += btnContinuarFail_Click;
-            btnContinuarFail.MouseEnter += btnContinuarFail_MouseEnter;
-            btnContinuarFail.MouseLeave += btnContinuarFail_MouseLeave;
             // 
             // label5
             // 
