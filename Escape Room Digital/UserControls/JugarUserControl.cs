@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualBasic;
+﻿using NAudio.Wave;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
+using System.IO;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Escape_Room_Digital.UserControls
 {
-    public partial class JugarUserControl : UserControl, IControlConMovimiento
+    public partial class JugarUserControl : UserControl, IControlConMovimiento, IEscenaGrafica
     {
         private Form1 _form;
         private int frameActual = 0;
@@ -17,75 +17,229 @@ namespace Escape_Room_Digital.UserControls
         private Image[] framesAnimacionArriba;
         private Image[] framesAnimacionDerecha;
         private Image[] framesAnimacionIzquierda;
+
+        private IWavePlayer playerMusica;
+        private AudioFileReader musicaFile;
+        private IWavePlayer playerVoz;
+        private AudioFileReader vozFile;
+        private IWavePlayer playerEfecto;
+        private AudioFileReader efectoFile;
+
+        private string textoCompleto = "";
+        private int letraActual = 0;
+
+        private List<Dialogo> listaDialogos;
+        private int indiceActual = 0;
+        private SegundaEscena gestorEscenas = new SegundaEscena();
         private List<ObjetoInteractuable> objetos;
         private ObjetoInteractuable objetoCercano = null;
+
+        private PictureBox _pbNPCActual = null;
+        private EventHandler _handlerSi;
+        private EventHandler _handlerNo;
+        private SoundPlayer _musicaActual;
+
+        private int _agrandarPixeles;
+        private int _agrandarLimite;
+        private Image _fondoPendiente;
+
+        public PictureBox Retrato => pbRetratoPanel;
+        public Panel Dialogo => pnlDialogoUnico;
+        public Control ControlGrafico => this;
+
+        public JugarUserControl()
+        {
+            InitializeComponent();
+            ConfigurarAnimaciones();
+            RegistrarHoverBotones(btnVolver, btnSi, btnNo, btnContinuar);
+            pnlDialogoUnico.Visible = false;
+
+            VerificarEstadoMision();
+        }
+        public void CambiarTextoDialogo(string texto) => lblTextoUnico.Text = texto;
+        public void CambiarImagen(Image nuevaImagen) => pbRetratoPanel.Image = nuevaImagen;
+
+        public void AnimarAgrandarImagen(int pixelesPorPaso, int limite)
+        {
+            _agrandarPixeles = pixelesPorPaso;
+            _agrandarLimite = limite;
+            timerAgrandar.Start();
+        }
+
+        public void CambiarFondoConRetraso(Image nuevoFondo, int milisegundos)
+        {
+            _fondoPendiente = nuevoFondo;
+            timerCambioFondo.Interval = milisegundos;
+            timerCambioFondo.Start();
+        }
 
         public void SetForm(Form1 form)
         {
             _form = form;
             objetos = new List<ObjetoInteractuable>
             {
-                new NPC_Nerd(pbNerd, this),
+                new NPC_Nerd(pbSpamton, this),
                 new NPC_Jester(pbJester, this),
                 new NPC_Ghost(pbGhost, this),
-                new NPC_ShortSkeleton(pbShortSkeleton, this),
-                new NPC_Turtle(pbTurtle, this)
+                new NPC_ShortSkeleton(pbRoulx, this),
+                new NPC_Turtle(pbTenna, this)
             };
-
-            if (EstadoDeJuego.HabloConLaTortuga == true)
+        }
+        public void ReproducirSonido(string ruta)
+        {
+            try
             {
-                lblMision.Visible = false;
+                if (playerVoz != null)
+                {
+                    playerVoz.Stop();
+                    playerVoz.Dispose();
+                    vozFile?.Dispose();
+                }
+
+                string rv = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", ruta);
+                if (File.Exists(rv))
+                {
+                    playerVoz = new WaveOutEvent();
+                    vozFile = new AudioFileReader(rv);
+                    playerVoz.Init(vozFile);
+                    playerVoz.Play();
+                }
+            }
+            catch { }
+        }
+
+        public void ReproducirMusica(string rutaArchivo)
+        {
+            try
+            {
+                playerMusica?.Stop();
+                playerMusica?.Dispose();
+                musicaFile?.Dispose();
+
+                string rm = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Audio", rutaArchivo);
+                if (File.Exists(rm))
+                {
+                    playerMusica = new WaveOutEvent();
+                    musicaFile = new AudioFileReader(rm);
+                    playerMusica.Init(musicaFile);
+                    playerMusica.Play();
+                }
+            }
+            catch { }
+        }
+        private void AbrirDialogo(List<Dialogo> lista)
+        {
+            listaDialogos = lista;
+            indiceActual = 0;
+            pnlDialogoUnico.Visible = true;
+            pnlDialogoUnico.BringToFront();
+            SiguienteDialogo();
+        }
+
+        private void SiguienteDialogo()
+        {
+            if (listaDialogos == null || indiceActual >= listaDialogos.Count)
+            {
+                CerrarDialogo();
+                return;
+            }
+
+            btnContinuar.Visible = true;
+            btnSi.Visible = btnNo.Visible = false;
+
+            var d = listaDialogos[indiceActual];
+            lblNombreUnico.Text = d.Hablante.Nombre;
+            textoCompleto = d.Texto;
+            letraActual = 0;
+            lblTextoUnico.Text = "";
+
+            pbRetratoPanel.Image = null;
+
+            if (d.ExpresionAUsar != null && d.Hablante.Expresiones.ContainsKey(d.ExpresionAUsar))
+            {
+                Image imagenExpresion = d.Hablante.Expresiones[d.ExpresionAUsar];
+
+                if (objetoCercano is NPC_Nerd || objetoCercano is NPC_Jester || objetoCercano is NPC_Turtle)
+                {
+                    if (_pbNPCActual != null) _pbNPCActual.Image = imagenExpresion;
+                    if (objetoCercano is NPC_Nerd)
+                        pbRetratoPanel.Image = d.Hablante.Expresiones["Standing Still"];
+                    else if (objetoCercano is NPC_Jester)
+                        pbRetratoPanel.Image = d.Hablante.Expresiones["Still"];
+                    else if (objetoCercano is NPC_Turtle)
+                        pbRetratoPanel.Image = d.Hablante.Expresiones["Still"]; 
+                }
+                else
+                {
+                    pbRetratoPanel.Image = imagenExpresion;
+                }
+            }
+            else
+            {
+                if (d.Hablante.Expresiones.Count > 0)
+                { 
+                    var listaExp = new List<Image>(d.Hablante.Expresiones.Values);
+                    pbRetratoPanel.Image = listaExp[0];
+                }
+            }
+
+            ReproducirSonido(d.Hablante.RutaVoz);
+            timerAnimacionTexto.Start();
+
+            d.EfectoEspecial?.Invoke((IEscenaGrafica)this);
+            indiceActual++;
+        }
+
+        private void timerAnimacionTexto_Tick(object sender, EventArgs e)
+        {
+            if (letraActual < textoCompleto.Length)
+            {
+                lblTextoUnico.Text += textoCompleto[letraActual];
+                letraActual++;
+            }
+            else
+            {
+                timerAnimacionTexto.Stop();
+                playerVoz?.Stop();
+
+                if (btnSi.Visible || btnNo.Visible)
+                    btnContinuar.Visible = false;
             }
         }
 
-        public JugarUserControl()
+        public void CerrarDialogo()
         {
-            InitializeComponent();
-            btnVolver.TabStop = false;
-            btnSiNerd.TabStop = false;
-            btnNoNerd.TabStop = false;
-            btnSiJester.TabStop = false;
-            btnNoJester.TabStop = false;
-            btnSiGhost.TabStop = false;
-            btnNoGhost.TabStop = false;
-            btnSiShortSkeleton.TabStop = false;
-            btnNoShortSkeleton.TabStop = false;
-
-            framesAnimacionAbajo = new Image[]
-            {
-                Properties.Resources.SkeletonWalk3,
-                Properties.Resources.SkeletonWalk1,
-                Properties.Resources.SkeletonWalk4,
-                Properties.Resources.SkeletonWalk2
-            };
-            framesAnimacionArriba = new Image[]
-            {
-                Properties.Resources.SkeletonUpWalk,
-                Properties.Resources.SkeletonUpWalk2,
-                Properties.Resources.SkeletonUpWalk3,
-                Properties.Resources.SkeletonUpWalk1
-            };
-            framesAnimacionDerecha = new Image[]
-            {
-                Properties.Resources.SkeletonRightWalk,
-                Properties.Resources.SkeletonRightWalk2,
-                Properties.Resources.SkeletonRightWalk3,
-                Properties.Resources.SkeletonRightWalk1
-            };
-            framesAnimacionIzquierda = new Image[]
-            {
-                Properties.Resources.SkeletonLeftWalk1,
-                Properties.Resources.SkeletonLeftWalk2,
-                Properties.Resources.SkeletonLeftWalk4,
-                Properties.Resources.SkeletonLeftWalk3
-            };
-            RegistrarHoverBotones(
-    btnVolver, btnOkTurtle, btnSiGhost, btnNoGhost,
-    btnSiShortSkeleton, btnNoShortSkeleton, btnSiNerd, btnNoNerd,
-    btnSiJester, btnNoJester, btnOkNerd, btnOkJester,
-    btnOkGhost, btnOkShortSkeleton, btnContinuarTurtle
-);
+            pnlDialogoUnico.Visible = false;
+            _pbNPCActual = null;
+            playerVoz?.Stop();
+            timerAnimacionTexto.Stop();
+            _form?.Select();
         }
+
+        public void ConfigurarBotonesDecision(string textoSi, Action accionSi, string textoNo, Action accionNo)
+        {
+            btnContinuar.Visible = false;
+            btnSi.Visible = btnNo.Visible = true;
+            btnSi.Text = textoSi;
+            btnNo.Text = textoNo;
+
+            if (_handlerSi != null) btnSi.Click -= _handlerSi;
+            if (_handlerNo != null) btnNo.Click -= _handlerNo;
+
+            _handlerSi = (s, e) => accionSi?.Invoke();
+            _handlerNo = (s, e) => accionNo?.Invoke();
+
+            btnSi.Click += _handlerSi;
+            btnNo.Click += _handlerNo;
+        }
+        private void ConfigurarAnimaciones()
+        {
+            framesAnimacionAbajo = new Image[] { Properties.Resources.SkeletonWalk3, Properties.Resources.SkeletonWalk1, Properties.Resources.SkeletonWalk4, Properties.Resources.SkeletonWalk2 };
+            framesAnimacionArriba = new Image[] { Properties.Resources.SkeletonUpWalk, Properties.Resources.SkeletonUpWalk2, Properties.Resources.SkeletonUpWalk3, Properties.Resources.SkeletonUpWalk1 };
+            framesAnimacionDerecha = new Image[] { Properties.Resources.SkeletonRightWalk, Properties.Resources.SkeletonRightWalk2, Properties.Resources.SkeletonRightWalk3, Properties.Resources.SkeletonRightWalk1 };
+            framesAnimacionIzquierda = new Image[] { Properties.Resources.SkeletonLeftWalk1, Properties.Resources.SkeletonLeftWalk2, Properties.Resources.SkeletonLeftWalk4, Properties.Resources.SkeletonLeftWalk3 };
+        }
+
         private void CambiarFramesAnimacion(Image[] frames)
         {
             if (framesActuales != frames)
@@ -115,51 +269,22 @@ namespace Escape_Room_Digital.UserControls
         {
             if (presionada)
             {
-                if (tecla == Keys.Space && objetoCercano != null)
+                if (tecla == Keys.Space || tecla == Keys.Enter)
                 {
-                    DetenerMovimiento();
-                    if (objetoCercano is NPC_Nerd)
-                        MostrarDialogoNPC(pnlDialogoNerd, lblDialogoNerd, btnSiNerd, btnNoNerd, btnOkNerd,
-                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelNerdCompletado);
-                    else if (objetoCercano is NPC_Jester)
-                        MostrarDialogoNPC(pnlDialogoJester, lblDialogoJester, btnSiJester, btnNoJester, btnOkJester,
-                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelJesterCompletado);
-                    else if (objetoCercano is NPC_Ghost)
-                        MostrarDialogoNPC(pnlDialogoGhost, lblDialogoGhost, btnSiGhost, btnNoGhost, btnOkGhost,
-                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelGhostCompletado);
-                    else if (objetoCercano is NPC_ShortSkeleton)
-                        MostrarDialogoNPC(pnlDialogoShortSkeleton, lblDialogoShortSkeleton, btnSiShortSkeleton, btnNoShortSkeleton, btnOkShortSkeleton,
-                            objetoCercano.TextoDialogo, EstadoDeJuego.NivelShortSkeletonCompletado);
-                    else if (objetoCercano is NPC_Turtle)
+                    if (pnlDialogoUnico.Visible)
                     {
-                        if (EstadoDeJuego.cantidadNivelesCompletados >= 4)
+                        if (timerAnimacionTexto.Enabled)
                         {
-                            pnlTurtle.Visible = true;
-
-                            lblTurtle.Text = "¡Has completado el juego! Gracias por \njugar.";
-                            btnOkTurtle.Visible = false;
-                            btnContinuarTurtle.Visible = true;
-
+                            timerAnimacionTexto.Stop();
+                            lblTextoUnico.Text = textoCompleto;
+                            letraActual = textoCompleto.Length;
+                            playerVoz?.Stop();
+                            var dActual = listaDialogos[indiceActual - 1];
+                            if (dActual.EfectoEspecial == null && !btnSi.Visible) btnContinuar.Visible = true;
                         }
-                        else
-                        {
-                            if (EstadoDeJuego.HabloConLaTortuga == false)
-                            {
-                                lblTurtle.Text = objetoCercano.TextoDialogo;
-                                pnlTurtle.Visible = true;
-                                EstadoDeJuego.HabloConLaTortuga = true;
-                                lblMision.Visible = false;
-                                pnlTurtle.BringToFront();
-                            }
-                            else
-                            {
-                                pnlTurtle.Visible = true;
-                                lblTurtle.Text = "Completa los Acertijos y Rompecabezas \nde mis compañeros y podrás escapar, \nasi que, adelante amigo!";
-                                lblMision.Visible = false;
-                                lblTurtle.BringToFront();
-                            }
-                        }
+                        else if (btnContinuar.Visible) SiguienteDialogo();
                     }
+                    else if (objetoCercano != null) IniciarCharlaSegunNPC();
                     return;
                 }
 
@@ -168,235 +293,75 @@ namespace Escape_Room_Digital.UserControls
                 else if (tecla == Keys.S) { timerMoverAbajo.Start(); CambiarFramesAnimacion(framesAnimacionAbajo); }
                 else if (tecla == Keys.D) { timerMoverDerecha.Start(); CambiarFramesAnimacion(framesAnimacionDerecha); }
             }
-            else
-            {
-                timerMoverArriba.Stop();
-                timerMoverAbajo.Stop();
-                timerMoverIzquierda.Stop();
-                timerMoverDerecha.Stop();
-                timerAnimacion.Stop();
-                frameActual = 0;
-                if (framesActuales != null)
-                    pbJugador.Image = framesActuales[0];
-            }
+            else DetenerMovimiento();
         }
-
-        // Nerd
-        private void btnSiNerd_Click(object sender, EventArgs e)
-        {
-            pnlDialogoNerd.Visible = false;
-            var nerd = new NerdUserControl();
-            nerd.SetForm(_form);
-            _form.MostrarUserControl(nerd);
-        }
-        private void btnNoNerd_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoNerd, btnNoNerd);
-        }
-
-        // Jester
-        private void btnSiJester_Click(object sender, EventArgs e)
-        {
-            pnlDialogoJester.Visible = false;
-            var jester = new JesterUserControl();
-            jester.SetForm(_form);
-            _form.MostrarUserControl(jester);
-        }
-        private void btnNoJester_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoJester, btnNoJester);
-        }
-
-        // Ghost
-        private void btnSiGhost_Click(object sender, EventArgs e)
-        {
-            pnlDialogoGhost.Visible = false;
-            var ghost = new GhostUserControl();
-            ghost.SetForm(_form);
-            _form.MostrarUserControl(ghost);
-        }
-        private void btnNoGhost_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoGhost, btnNoGhost);
-        }
-
-        // ShortSkeleton
-        private void btnSiShortSkeleton_Click(object sender, EventArgs e)
-        {
-            pnlDialogoShortSkeleton.Visible = false;
-            var shortSkeleton = new ShortSkeletonUserControl();
-            shortSkeleton.SetForm(_form);
-            _form.MostrarUserControl(shortSkeleton);
-        }
-        private void btnNoShortSkeleton_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoShortSkeleton, btnNoShortSkeleton);
-        }
-
-        public void btnVolver_Click(object sender, EventArgs e)
-        {
-            _form.MostrarUserControl(new MenuUserControl());
-        }
-
-        private void timerMoverDerecha_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Right < this.ClientSize.Width)
-                pbJugador.Left += 5;
-            VerificarProximidad();
-        }
-
-        private void timerMoverArriba_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Top > 0)
-                pbJugador.Top -= 5;
-            VerificarProximidad();
-        }
-
-        private void timerMoverIzquierda_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Left > 0)
-                pbJugador.Left -= 5;
-            VerificarProximidad();
-        }
-
-        private void timerMoverAbajo_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Bottom < this.ClientSize.Height)
-                pbJugador.Top += 5;
-            VerificarProximidad();
-        }
-
         private void VerificarProximidad()
         {
-
             objetoCercano = null;
-            pbNerdCloud.Visible = false;
-            pbGhostCloud.Visible = false;
-            pbJesterCloud.Visible = false;
-            pbShortSkeletonCloud.Visible = false;
-            pbTurtleCloud.Visible = false;
+            pbSpamtonCloud.Visible = pbGhostCloud.Visible = pbJesterCloud.Visible =
+            pbRoulxCloud.Visible = pbTurtleCloud.Visible = false;
+
             foreach (var obj in objetos)
             {
                 if (obj.EstaCerca(pbJugador))
                 {
                     objetoCercano = obj;
-                    if (obj is NPC_Nerd)
-                    {
-                        pbNerdCloud.Visible = true;
-                    }
-                    else if (obj is NPC_Ghost)
-                    {
-                        pbGhostCloud.Visible = true;
-                    }
-                    else if (obj is NPC_Jester)
-                    {
-                        pbJesterCloud.Visible = true;
-                    }
-                    else if (obj is NPC_ShortSkeleton)
-                    {
-                        pbShortSkeletonCloud.Visible = true;
-                    }
-                    else if (obj is NPC_Turtle)
-                    {
-                        pbTurtleCloud.Visible = true;
-                    }
+                    if (obj is NPC_Nerd) pbSpamtonCloud.Visible = true;
+                    else if (obj is NPC_Ghost) pbGhostCloud.Visible = true;
+                    else if (obj is NPC_Jester) pbJesterCloud.Visible = true;
+                    else if (obj is NPC_ShortSkeleton) pbRoulxCloud.Visible = true;
+                    else if (obj is NPC_Turtle) pbTurtleCloud.Visible = true;
                     break;
                 }
             }
         }
 
+        private void IniciarCharlaSegunNPC()
+        {
+            DetenerMovimiento();
+
+            if (objetoCercano is NPC_Nerd) { _pbNPCActual = pbSpamton; AbrirDialogo(gestorEscenas.Spamton(this)); }
+            else if (objetoCercano is NPC_Jester) { _pbNPCActual = pbJester; AbrirDialogo(gestorEscenas.Jevil(this)); }
+            else if (objetoCercano is NPC_Ghost) { _pbNPCActual = pbGhost; AbrirDialogo(gestorEscenas.Napstablook(this)); }
+            else if (objetoCercano is NPC_ShortSkeleton) { _pbNPCActual = pbRoulx; AbrirDialogo(gestorEscenas.RoulxKaard(this)); }
+            else if (objetoCercano is NPC_Turtle)
+            {
+                _pbNPCActual = pbTenna;
+
+                AbrirDialogo(gestorEscenas.Tenna(this));
+
+                EstadoDeJuego.HabloConTenna = true;
+                lblMision.Visible = false;
+            }
+        }
+
+        private void VerificarEstadoMision()
+        {
+            if (EstadoDeJuego.HabloConTenna) lblMision.Visible = false;
+        }
         private void timerAnimacion_Tick(object sender, EventArgs e)
         {
             frameActual++;
-            if (frameActual >= framesActuales.Length)
-                frameActual = 0;
+            if (frameActual >= framesActuales.Length) frameActual = 0;
             pbJugador.Image = framesActuales[frameActual];
         }
 
-        private void pnlDialogoJester_Paint(object sender, PaintEventArgs e)
-        {
-            DibujarBorde(e, pnlDialogoJester);
-        }
+        private void timerMoverDerecha_Tick(object sender, EventArgs e) { if (pbJugador.Right < Width) pbJugador.Left += 5; VerificarProximidad(); }
+        private void timerMoverArriba_Tick(object sender, EventArgs e) { if (pbJugador.Top > 0) pbJugador.Top -= 5; VerificarProximidad(); }
+        private void timerMoverIzquierda_Tick(object sender, EventArgs e) { if (pbJugador.Left > 0) pbJugador.Left -= 5; VerificarProximidad(); }
+        private void timerMoverAbajo_Tick(object sender, EventArgs e) { if (pbJugador.Bottom < Height) pbJugador.Top += 5; VerificarProximidad(); }
 
-        private void pnlDialogoGhost_Paint(object sender, PaintEventArgs e)
+        private void timerAgrandar_Tick(object sender, EventArgs e)
         {
-            DibujarBorde(e, pnlDialogoGhost);
-        }
-
-        private void pnlDialogoShortSkeleton_Paint(object sender, PaintEventArgs e)
-        {
-            DibujarBorde(e, pnlDialogoShortSkeleton);
-        }
-
-        private void pnlDialogoNerd_Paint(object sender, PaintEventArgs e)
-        {
-            DibujarBorde(e, pnlDialogoNerd);
-        }
-
-        private void pnlTurtle_Paint(object sender, PaintEventArgs e)
-        {
-            DibujarBorde(e, pnlTurtle);
-        }
-
-        private void btnOkTurtle_Click(object sender, EventArgs e)
-        {
-            switch (EstadoDeJuego.VecesPresionado)
+            if (pbJugador.Width < _agrandarLimite)
             {
-                case 0:
-                    lblTurtle.Text = "Hemos estado aqui por miles de años, \ny no hemos podido salir, somos muy viejos \npara entender estos rompecabezas";
-                    break;
-                case 1:
-                    lblTurtle.Text = "Pero ahora que tu estas aqui, puedes \nliberarnos de esta mazmorra";
-                    break;
-                case 2:
-                    lblTurtle.Text = "Si quieres salir, debes completar los\nacertijos y rompecabezas con mis \ncompañeros, solo asi podremos escapar \njuntos";
-                    break;
-                case 3:
-                    lblTurtle.Text = "Completa los Acertijos y Rompecabezas \ncon nuestros compañeros y podrás escapar, \nasi que, adelante amigo!";
-                    break;
-                case 4:
-                    pnlTurtle.Visible = false;
-                    break;
-                default:
-                    pnlTurtle.Visible = false;
-                    break;
+                pbJugador.Width += _agrandarPixeles;
+                pbJugador.Height += _agrandarPixeles;
             }
-            EstadoDeJuego.VecesPresionado++;
-
-        }
-        private void btnOkNerd_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoNerd, btnOkNerd);
-        }
-        private void btnOkGhost_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoGhost, btnOkGhost);
-        }
-        private void btnOkJester_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoJester, btnOkJester);
+            else timerAgrandar.Stop();
         }
 
-        private void btnOkShortSkeleton_Click(object sender, EventArgs e)
-        {
-            CerrarDialogo(pnlDialogoShortSkeleton, btnOkShortSkeleton);
-        }
-
-        private void btnContinuarTurtle_Click(object sender, EventArgs e)
-        {
-            _form.MostrarUserControl(new CreditosUserControl());
-        }
-        private void DibujarBorde(PaintEventArgs e, Panel panel)
-        {
-            int grosor = 3;
-            using (Pen pen = new Pen(Color.White, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen, offset, offset,
-                    panel.ClientSize.Width - grosor,
-                    panel.ClientSize.Height - grosor);
-            }
-        }
+        private void timerCambioFondo_Tick(object sender, EventArgs e) { BackgroundImage = _fondoPendiente; timerCambioFondo.Stop(); }
         private void RegistrarHoverBotones(params Button[] botones)
         {
             foreach (var btn in botones)
@@ -405,31 +370,34 @@ namespace Escape_Room_Digital.UserControls
                 btn.MouseLeave += (s, e) => btn.ForeColor = Color.White;
             }
         }
-        private void MostrarDialogoNPC(Panel panel, Label label, Button btnSi, Button btnNo, Button btnOk, string textoDialogo, bool nivelCompletado)
+
+        private void btnContinuar_Click(object sender, EventArgs e)
         {
-            if (nivelCompletado)
+            if (timerAnimacionTexto.Enabled)
             {
-                label.Text = "Ya has completado este nivel.\n¡Intenta con otro personaje!";
-                btnSi.Visible = false;
-                btnNo.Visible = false;
-                btnOk.Visible = true;
+                // Saltar animación, mostrar texto completo
+                timerAnimacionTexto.Stop();
+                lblTextoUnico.Text = textoCompleto;
+                letraActual = textoCompleto.Length;
+                playerVoz?.Stop();
+
+                // Si el diálogo tiene efecto especial con botones Si/No, ocultamos continuar
+                var dActual = listaDialogos[indiceActual - 1];
+                if (dActual.EfectoEspecial != null)
+                    btnContinuar.Visible = false;
             }
             else
             {
-                label.Text = textoDialogo;
-                btnSi.Visible = true;
-                btnNo.Visible = true;
-                btnOk.Visible = false;
+                SiguienteDialogo();
             }
-            panel.Visible = true;
-            panel.BringToFront();
         }
-        private void CerrarDialogo(Panel panel, Button btnOk)
-        {
-            panel.Visible = false;
-            btnOk.TabStop = false;
-            _form.Select();
-        }
+        
+        private void btnVolver_Click(object sender, EventArgs e) => _form.MostrarUserControl(new MenuUserControl());
 
+        public void IrANivel(UserControl nivel)
+        {
+            CerrarDialogo();
+            _form.MostrarUserControl(nivel);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Escape_Room_Digital.UserControls
             timerCronómetro.Start();
             _acertijo = new AcertijoTexto(
                 "Un león se esconde en una de tres habitaciones.. \nSabiendo que solamente una de esas afirmaciones es verdadera, ¿en cuál habitación está el león?(1,2 o 3)",
-                "3", 0
+                "3", 120
             );
             lblAcertijo.Text = _acertijo.Pregunta;
             lblIntentos.Text = $"Intentos: {_acertijo.Intentos}";
@@ -72,8 +72,8 @@ namespace Escape_Room_Digital.UserControls
         protected override void AlResolver()
         {
             timerCronómetro.Stop();
-            EstadoDeJuego.TiempoRestanteNerd = segundosRestantes;
             EstadoDeJuego.NivelNerdCompletado = true;
+            EstadoDeJuego.TiempoRestanteNerd = segundosRestantes;
             EstadoDeJuego.cantidadNivelesCompletados++;
             _form.MostrarUserControl(new JugarUserControl());
         }

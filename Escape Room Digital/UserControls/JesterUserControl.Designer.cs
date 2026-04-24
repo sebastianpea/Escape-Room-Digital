@@ -335,7 +335,7 @@
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = Properties.Resources.ClownImage;
+            pictureBox2.Image = Properties.Resources.Jevil;
             pictureBox2.Location = new Point(80, 14);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(157, 152);

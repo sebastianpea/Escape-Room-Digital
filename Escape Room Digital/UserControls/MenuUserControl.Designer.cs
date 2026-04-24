@@ -116,8 +116,7 @@
             // 
             // MenuUserControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaptionText;
             BackgroundImage = Properties.Resources.BackgroundMenuImage1;
             BackgroundImageLayout = ImageLayout.Stretch;
@@ -131,7 +130,7 @@
             ForeColor = SystemColors.Control;
             Margin = new Padding(3, 2, 3, 2);
             Name = "MenuUserControl";
-            Size = new Size(1798, 1080);
+            Size = new Size(1920, 1080);
             ResumeLayout(false);
             PerformLayout();
         }

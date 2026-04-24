@@ -259,7 +259,7 @@
             // pictureBox4
             // 
             pictureBox4.BackColor = Color.Transparent;
-            pictureBox4.Image = Properties.Resources.NerdImage;
+            pictureBox4.Image = Properties.Resources.SpamtonStill;
             pictureBox4.Location = new Point(36, 25);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(115, 147);
@@ -305,7 +305,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.NerdImage;
+            pictureBox1.Image = Properties.Resources.SpamtonStill;
             pictureBox1.Location = new Point(36, 25);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(115, 147);

@@ -21,7 +21,7 @@ namespace Escape_Room_Digital.UserControls
         {
             InitializeComponent();
 
-            int TiempoTotal = EstadoDeJuego.TiempoRestanteNerd + EstadoDeJuego.TiempoRestanteGhost + EstadoDeJuego.TiempoRestanteShortSkeleton;
+            int TiempoTotal = EstadoDeJuego.TiempoRestanteNerd + EstadoDeJuego.TiempoRestanteGhost + EstadoDeJuego.TiempoRestanteShortSkeleton + EstadoDeJuego.TiempoRestanteNerd2;
 
             int Puntuacion = TiempoTotal * 1000;
 
@@ -44,9 +44,6 @@ namespace Escape_Room_Digital.UserControls
         private void btnSalir_MouseLeave(object sender, EventArgs e)
         {
             btnSalir.ForeColor = Color.White;
-        }
-        private void ConseguirPuntuacion()
-        {
         }
     }
 }

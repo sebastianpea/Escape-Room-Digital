@@ -109,8 +109,6 @@
             btnVolver.Text = "Volver";
             btnVolver.UseVisualStyleBackColor = false;
             btnVolver.Click += btnVolver_Click;
-            btnVolver.MouseEnter += btnVolver_MouseEnter;
-            btnVolver.MouseLeave += btnVolver_MouseLeave;
             // 
             // timerMoverDerecha
             // 
@@ -297,8 +295,6 @@
             btnNoMap.Text = "No";
             btnNoMap.UseVisualStyleBackColor = false;
             btnNoMap.Click += btnNoMap_Click;
-            btnNoMap.MouseEnter += btnNoMap_MouseEnter;
-            btnNoMap.MouseLeave += btnNoMap_MouseLeave;
             // 
             // btnSiMap
             // 
@@ -312,8 +308,6 @@
             btnSiMap.Text = "Si";
             btnSiMap.UseVisualStyleBackColor = false;
             btnSiMap.Click += btnSiMap_Click;
-            btnSiMap.MouseEnter += btnSiMap_MouseEnter;
-            btnSiMap.MouseLeave += btnSiMap_MouseLeave;
             // 
             // lblDialogoMap
             // 
@@ -349,8 +343,6 @@
             btnNoNeedle.Text = "No";
             btnNoNeedle.UseVisualStyleBackColor = false;
             btnNoNeedle.Click += btnNoNeedle_Click;
-            btnNoNeedle.MouseEnter += btnNoNeedle_MouseEnter;
-            btnNoNeedle.MouseLeave += btnNoNeedle_MouseLeave;
             // 
             // btnSiNeedle
             // 
@@ -364,8 +356,6 @@
             btnSiNeedle.Text = "Si";
             btnSiNeedle.UseVisualStyleBackColor = false;
             btnSiNeedle.Click += btnSiNeedle_Click;
-            btnSiNeedle.MouseEnter += btnSiNeedle_MouseEnter;
-            btnSiNeedle.MouseLeave += btnSiNeedle_MouseLeave;
             // 
             // lblNeedle
             // 
@@ -401,8 +391,6 @@
             btnNoPiano.Text = "No";
             btnNoPiano.UseVisualStyleBackColor = false;
             btnNoPiano.Click += btnNoPiano_Click;
-            btnNoPiano.MouseEnter += btnNoPiano_MouseEnter;
-            btnNoPiano.MouseLeave += btnNoPiano_MouseLeave;
             // 
             // btnSiPiano
             // 
@@ -416,8 +404,6 @@
             btnSiPiano.Text = "Si";
             btnSiPiano.UseVisualStyleBackColor = false;
             btnSiPiano.Click += btnSiPiano_Click;
-            btnSiPiano.MouseEnter += btnSiPiano_MouseEnter;
-            btnSiPiano.MouseLeave += btnSiPiano_MouseLeave;
             // 
             // lblPiano
             // 
@@ -453,8 +439,6 @@
             btnNoBook.Text = "No";
             btnNoBook.UseVisualStyleBackColor = false;
             btnNoBook.Click += btnNoBook_Click;
-            btnNoBook.MouseEnter += btnNoBook_MouseEnter;
-            btnNoBook.MouseLeave += btnNoBook_MouseLeave;
             // 
             // btnSiBook
             // 
@@ -468,8 +452,6 @@
             btnSiBook.Text = "Si";
             btnSiBook.UseVisualStyleBackColor = false;
             btnSiBook.Click += btnSiBook_Click;
-            btnSiBook.MouseEnter += btnSiBook_MouseEnter;
-            btnSiBook.MouseLeave += btnSiBook_MouseLeave;
             // 
             // lblBook
             // 
@@ -505,8 +487,6 @@
             btnNoClock.Text = "No";
             btnNoClock.UseVisualStyleBackColor = false;
             btnNoClock.Click += btnNoClock_Click;
-            btnNoClock.MouseEnter += btnNoClock_MouseEnter;
-            btnNoClock.MouseLeave += btnNoClock_MouseLeave;
             // 
             // btnSiClock
             // 
@@ -520,8 +500,6 @@
             btnSiClock.Text = "Si";
             btnSiClock.UseVisualStyleBackColor = false;
             btnSiClock.Click += btnSiClock_Click;
-            btnSiClock.MouseEnter += btnSiClock_MouseEnter;
-            btnSiClock.MouseLeave += btnSiClock_MouseLeave;
             // 
             // lblClock
             // 
@@ -592,8 +570,6 @@
             btnSeguir.UseVisualStyleBackColor = false;
             btnSeguir.Visible = false;
             btnSeguir.Click += btnSeguir_Click;
-            btnSeguir.MouseEnter += btnSeguir_MouseEnter;
-            btnSeguir.MouseLeave += btnSeguir_MouseLeave;
             // 
             // btnIntentar
             // 
@@ -607,8 +583,6 @@
             btnIntentar.Text = "Intentar";
             btnIntentar.UseVisualStyleBackColor = false;
             btnIntentar.Click += btnIntentar_Click;
-            btnIntentar.MouseEnter += btnIntentar_MouseEnter;
-            btnIntentar.MouseLeave += btnIntentar_MouseLeave;
             // 
             // pictureBox3
             // 
@@ -633,8 +607,6 @@
             btnFailContinuar.Text = "Continuar";
             btnFailContinuar.UseVisualStyleBackColor = false;
             btnFailContinuar.Click += btnFailContinuar_Click;
-            btnFailContinuar.MouseEnter += btnFailContinuar_MouseEnter;
-            btnFailContinuar.MouseLeave += btnFailContinuar_MouseLeave;
             // 
             // lblFail
             // 

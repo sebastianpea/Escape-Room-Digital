@@ -16,40 +16,36 @@ namespace Escape_Room_Digital.UserControls
         private ObjetoInteractuable objetoCercano = null;
         int segundosRestantes = 60;
         int cantidadDeIntentos = 2;
+
         public new void SetForm(Form1 form)
         {
             _form = form;
             timerCronometro.Start();
             objetos = new List<ObjetoInteractuable>
-    {
-        new ObjetoInteractuable_Jeringa(pbNeedle, this),
-        new ObjetoInteractuable_Piano(pbPiano, this),
-        new ObjetoInteractuable_Libro(pbBook, this),
-        new ObjetoInteractuable_Mapa(pbMap, this),
-        new ObjetoInteractuable_Reloj(pbClock, this)
-    };
-
+            {
+                new ObjetoInteractuable_Jeringa(pbNeedle, this),
+                new ObjetoInteractuable_Piano(pbPiano, this),
+                new ObjetoInteractuable_Libro(pbBook, this),
+                new ObjetoInteractuable_Mapa(pbMap, this),
+                new ObjetoInteractuable_Reloj(pbClock, this)
+            };
         }
-
 
         public GhostUserControl()
         {
             InitializeComponent();
-            btnVolver.TabStop = false;
-            btnSiBook.TabStop = false;
-            btnNoBook.TabStop = false;
-            btnSiNeedle.TabStop = false;
-            btnNoNeedle.TabStop = false;
-            btnSiClock.TabStop = false;
-            btnNoClock.TabStop = false;
-            btnSiMap.TabStop = false;
-            btnNoMap.TabStop = false;
-            btnSiPiano.TabStop = false;
-            btnNoPiano.TabStop = false;
             lblIntentos.Text = $"Intentos: {cantidadDeIntentos}";
             pbTiempo.Minimum = 0;
             pbTiempo.Maximum = 60;
             pbTiempo.Value = 60;
+
+            RegistrarTabStop(btnVolver, btnSiBook, btnNoBook, btnSiNeedle, btnNoNeedle,
+                btnSiClock, btnNoClock, btnSiMap, btnNoMap, btnSiPiano, btnNoPiano,
+                btnFailContinuar, btnIntentar, btnSeguir);
+
+            RegistrarHover(btnVolver, btnSiBook, btnNoBook, btnSiNeedle, btnNoNeedle,
+                btnSiClock, btnNoClock, btnSiMap, btnNoMap, btnSiPiano, btnNoPiano,
+                btnFailContinuar, btnIntentar, btnSeguir);
 
             framesAnimacionAbajo = new Image[]
             {
@@ -84,6 +80,62 @@ namespace Escape_Room_Digital.UserControls
             pbJugador.Image = framesActuales[0];
         }
 
+        // Metodos de ayuda
+        private void RegistrarTabStop(params Button[] botones)
+        {
+            foreach (var btn in botones)
+                btn.TabStop = false;
+        }
+
+        private void RegistrarHover(params Button[] botones)
+        {
+            foreach (var btn in botones)
+            {
+                btn.MouseEnter += (s, e) => btn.ForeColor = Color.Yellow;
+                btn.MouseLeave += (s, e) => btn.ForeColor = Color.White;
+            }
+        }
+
+        private void DibujarBorde(PaintEventArgs e, Panel panel)
+        {
+            int grosor = 3;
+            using (Pen pen = new Pen(Color.White, grosor))
+            {
+                int offset = grosor / 2;
+                e.Graphics.DrawRectangle(pen, offset, offset,
+                    panel.ClientSize.Width - grosor,
+                    panel.ClientSize.Height - grosor);
+            }
+        }
+
+        private void MostrarPanelIncorrecto()
+        {
+            pnlFail.Visible = true;
+            btnIntentar.Visible = true;
+            btnFailContinuar.Visible = false;
+            btnSeguir.Visible = false;
+        }
+
+        private void CerrarPanelObjeto(Panel panel)
+        {
+            panel.Visible = false;
+            objetoCercano = null;
+            VerificarProximidad();
+            _form.Focus();
+        }
+
+        private void RegistrarIntento(Panel panel)
+        {
+            panel.Visible = false;
+            pnlNeedle.Visible = false;
+            cantidadDeIntentos--;
+            lblIntentos.Text = $"Intentos: {cantidadDeIntentos}";
+            MostrarPanelIncorrecto();
+            VerificarIntentos();
+            objetoCercano = null;
+            VerificarProximidad();
+            _form.Focus();
+        }
         private void CambiarFramesAnimacion(Image[] frames)
         {
             if (framesActuales != frames)
@@ -94,6 +146,7 @@ namespace Escape_Room_Digital.UserControls
             }
             timerAnimacion.Start();
         }
+
         public void DetenerMovimiento()
         {
             timerMoverArriba.Stop();
@@ -115,31 +168,11 @@ namespace Escape_Room_Digital.UserControls
                 if (tecla == Keys.Space && objetoCercano != null)
                 {
                     DetenerMovimiento();
-                    if (objetoCercano is ObjetoInteractuable_Jeringa)
-                    {
-                        lblNeedle.Text = objetoCercano.TextoDialogo;
-                        pnlNeedle.Visible = true;
-                    }
-                    else if (objetoCercano is ObjetoInteractuable_Piano)
-                    {
-                        lblPiano.Text = objetoCercano.TextoDialogo;
-                        pnlPiano.Visible = true;
-                    }
-                    else if (objetoCercano is ObjetoInteractuable_Libro)
-                    {
-                        lblBook.Text = objetoCercano.TextoDialogo;
-                        pnlBook.Visible = true;
-                    }
-                    else if (objetoCercano is ObjetoInteractuable_Mapa)
-                    {
-                        lblDialogoMap.Text = objetoCercano.TextoDialogo;
-                        pnlMap.Visible = true;
-                    }
-                    else if (objetoCercano is ObjetoInteractuable_Reloj)
-                    {
-                        lblClock.Text = objetoCercano.TextoDialogo;
-                        pnlClock.Visible = true;
-                    }
+                    if (objetoCercano is ObjetoInteractuable_Jeringa) { lblNeedle.Text = objetoCercano.TextoDialogo; pnlNeedle.Visible = true; }
+                    else if (objetoCercano is ObjetoInteractuable_Piano) { lblPiano.Text = objetoCercano.TextoDialogo; pnlPiano.Visible = true; }
+                    else if (objetoCercano is ObjetoInteractuable_Libro) { lblBook.Text = objetoCercano.TextoDialogo; pnlBook.Visible = true; }
+                    else if (objetoCercano is ObjetoInteractuable_Mapa) { lblDialogoMap.Text = objetoCercano.TextoDialogo; pnlMap.Visible = true; }
+                    else if (objetoCercano is ObjetoInteractuable_Reloj) { lblClock.Text = objetoCercano.TextoDialogo; pnlClock.Visible = true; }
                     return;
                 }
                 if (tecla == Keys.W) { timerMoverArriba.Start(); CambiarFramesAnimacion(framesAnimacionArriba); }
@@ -167,75 +200,38 @@ namespace Escape_Room_Digital.UserControls
             pbBookCloud.Visible = false;
             pbClockCloud.Visible = false;
             pbMapCloud.Visible = false;
+
             foreach (var obj in objetos)
             {
-                if (obj.EstaCerca(pbJugador))
-                {
-                    objetoCercano = obj;
-                    if (obj is ObjetoInteractuable_Libro)
-                    {
-                        pbBookCloud.Visible = true;
-                    }
-                    else if (obj is ObjetoInteractuable_Jeringa)
-                    {
-                        pbNeedleCloud.Visible = true;
-                    }
-                    else if (obj is ObjetoInteractuable_Mapa)
-                    {
-                        pbMapCloud.Visible = true;
-                    }
-                    else if (obj is ObjetoInteractuable_Reloj)
-                    {
-                        pbClockCloud.Visible = true;
-                    }
-                    else if (obj is ObjetoInteractuable_Piano)
-                    {
-                        pbPianoCloud.Visible = true;
-                    }
-                    break;
-                }
+                if (!obj.EstaCerca(pbJugador)) continue;
+                objetoCercano = obj;
+                if (obj is ObjetoInteractuable_Libro) pbBookCloud.Visible = true;
+                else if (obj is ObjetoInteractuable_Jeringa) pbNeedleCloud.Visible = true;
+                else if (obj is ObjetoInteractuable_Mapa) pbMapCloud.Visible = true;
+                else if (obj is ObjetoInteractuable_Reloj) pbClockCloud.Visible = true;
+                else if (obj is ObjetoInteractuable_Piano) pbPianoCloud.Visible = true;
+                break;
             }
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void VerificarIntentos()
         {
-            _form.MostrarUserControl(new JugarUserControl());
+            if (cantidadDeIntentos > 0) return;
+            timerCronometro.Stop();
+            DetenerMovimiento();
+            lblFail.Text = "Oh no... Perdiste, adios\r\na nuestra libertad\r\nOh no...\r\n";
+            pnlFail.Visible = true;
+            btnFailContinuar.Visible = true;
+            btnIntentar.Visible = false;
         }
-
-        private void timerMoverDerecha_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Right < this.ClientSize.Width)
-                pbJugador.Left += 5;
-            VerificarProximidad();
-        }
-
-        private void timerMoverArriba_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Top > 0)
-                pbJugador.Top -= 5;
-            VerificarProximidad();
-
-        }
-
-        private void timerMoverIzquierda_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Left > 0)
-                pbJugador.Left -= 5;
-            VerificarProximidad();
-        }
-
-        private void timerMoverAbajo_Tick(object sender, EventArgs e)
-        {
-            if (pbJugador.Bottom < this.ClientSize.Height)
-                pbJugador.Top += 5;
-            VerificarProximidad();
-        }
+        private void timerMoverDerecha_Tick(object sender, EventArgs e) { if (pbJugador.Right < ClientSize.Width) pbJugador.Left += 5; VerificarProximidad(); }
+        private void timerMoverArriba_Tick(object sender, EventArgs e) { if (pbJugador.Top > 0) pbJugador.Top -= 5; VerificarProximidad(); }
+        private void timerMoverIzquierda_Tick(object sender, EventArgs e) { if (pbJugador.Left > 0) pbJugador.Left -= 5; VerificarProximidad(); }
+        private void timerMoverAbajo_Tick(object sender, EventArgs e) { if (pbJugador.Bottom < ClientSize.Height) pbJugador.Top += 5; VerificarProximidad(); }
 
         private void timerAnimacion_Tick(object sender, EventArgs e)
         {
-            frameActual++;
-            if (frameActual >= framesActuales.Length)
-                frameActual = 0;
+            frameActual = (frameActual + 1) % framesActuales.Length;
             pbJugador.Image = framesActuales[frameActual];
         }
 
@@ -249,10 +245,7 @@ namespace Escape_Room_Digital.UserControls
                     pbTiempo.Value = segundosRestantes + 1;
                     pbTiempo.Value = segundosRestantes;
                 }
-                else
-                {
-                    pbTiempo.Value = segundosRestantes;
-                }
+                else pbTiempo.Value = segundosRestantes;
                 lblCronometro.Text = string.Format("00:00:{0:00}", segundosRestantes);
             }
             else
@@ -264,378 +257,49 @@ namespace Escape_Room_Digital.UserControls
                 btnFailContinuar.Visible = true;
             }
         }
-        protected override void AlResolver()
-        {
-            EstadoDeJuego.TiempoRestanteGhost = segundosRestantes;
-            EstadoDeJuego.NivelGhostCompletado = true;
-            EstadoDeJuego.cantidadNivelesCompletados++;
-        }
 
+        //Botones Si/No
         private void btnSiMap_Click(object sender, EventArgs e)
         {
+            timerCronometro.Stop();
             lblFail.Text = "Wow, en serio lo lograste, \nfelicidades y todo eso...";
             pnlFail.Visible = true;
             btnSeguir.Visible = true;
             btnIntentar.Visible = false;
             btnFailContinuar.Visible = false;
-            timerCronometro.Stop();
             AlResolver();
         }
 
-        private void btnNoMap_Click(object sender, EventArgs e)
+        private void btnNoMap_Click(object sender, EventArgs e) => CerrarPanelObjeto(pnlMap);
+        private void btnSiNeedle_Click(object sender, EventArgs e) => RegistrarIntento(pnlNeedle);
+        private void btnNoNeedle_Click(object sender, EventArgs e) => CerrarPanelObjeto(pnlNeedle);
+        private void btnSiPiano_Click(object sender, EventArgs e) => RegistrarIntento(pnlPiano);
+        private void btnNoPiano_Click(object sender, EventArgs e) => CerrarPanelObjeto(pnlPiano);
+        private void btnSiBook_Click(object sender, EventArgs e) => RegistrarIntento(pnlBook);
+        private void btnNoBook_Click(object sender, EventArgs e) => CerrarPanelObjeto(pnlBook);
+        private void btnSiClock_Click(object sender, EventArgs e) => RegistrarIntento(pnlClock);
+        private void btnNoClock_Click(object sender, EventArgs e) => CerrarPanelObjeto(pnlClock);
+
+        //Navegación
+        private void btnVolver_Click(object sender, EventArgs e) => _form.MostrarUserControl(new JugarUserControl());
+        private void btnFailContinuar_Click(object sender, EventArgs e) => _form.MostrarUserControl(new MenuUserControl());
+        private void btnIntentar_Click(object sender, EventArgs e) => pnlFail.Visible = false;
+        private void btnSeguir_Click(object sender, EventArgs e) => _form.MostrarUserControl(new JugarUserControl());
+
+        //Paint 
+        private void pnlClock_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlClock);
+        private void pnlBook_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlBook);
+        private void pnlPiano_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlPiano);
+        private void pnlNeedle_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlNeedle);
+        private void pnlMap_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlMap);
+        private void pnlFail_Paint(object sender, PaintEventArgs e) => DibujarBorde(e, pnlFail);
+
+        //AlResolver
+        protected override void AlResolver()
         {
-            pnlMap.Visible = false;
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnSiNeedle_Click(object sender, EventArgs e)
-        {
-            pnlFail.Visible = true;
-            btnIntentar.Visible = true;
-            btnFailContinuar.Visible = false;
-            pnlNeedle.Visible = false;
-            lblIntentos.Text = $"Intentos: {--cantidadDeIntentos}";
-            VerificarIntentos();
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnNoNeedle_Click(object sender, EventArgs e)
-        {
-            pnlNeedle.Visible = false;
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnSiPiano_Click(object sender, EventArgs e)
-        {
-            pnlFail.Visible = true;
-            btnIntentar.Visible = true;
-            btnFailContinuar.Visible = false;
-            pnlNeedle.Visible = false;
-            pnlPiano.Visible = false;
-            lblIntentos.Text = $"Intentos: {--cantidadDeIntentos}";
-            VerificarIntentos();
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnNoPiano_Click(object sender, EventArgs e)
-        {
-            pnlPiano.Visible = false;
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnSiBook_Click(object sender, EventArgs e)
-        {
-            pnlFail.Visible = true;
-            btnIntentar.Visible = true;
-            btnFailContinuar.Visible = false;
-            pnlNeedle.Visible = false;
-            pnlBook.Visible = false;
-            lblIntentos.Text = $"Intentos: {--cantidadDeIntentos}";
-            VerificarIntentos();
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnNoBook_Click(object sender, EventArgs e)
-        {
-            pnlBook.Visible = false;
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnNoClock_Click(object sender, EventArgs e)
-        {
-            pnlClock.Visible = false;
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void btnSiClock_Click(object sender, EventArgs e)
-        {
-            pnlFail.Visible = true;
-            btnIntentar.Visible = true;
-            btnFailContinuar.Visible = false;
-            pnlNeedle.Visible = false;
-            pnlClock.Visible = false;
-            lblIntentos.Text = $"Intentos: {--cantidadDeIntentos}";
-            VerificarIntentos();
-            objetoCercano = null;
-            VerificarProximidad();
-            _form.Focus();
-        }
-
-        private void VerificarIntentos()
-        {
-            if (cantidadDeIntentos <= 0)
-            {
-                timerCronometro.Stop();
-                DetenerMovimiento();
-                lblFail.Text = "Oh no... Perdiste, adios\r\na nuestra libertad\r\nOh no...\r\n";
-                pnlFail.Visible = true;
-                btnFailContinuar.Visible = true;
-                btnIntentar.Visible = false;
-            }
-        }
-
-        private void btnSiClock_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiClock.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiClock_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiClock.ForeColor = Color.White;
-        }
-
-        private void btnSiBook_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiBook.ForeColor = Color.Yellow;
-        }
-        private void btnSiBook_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiBook.ForeColor = Color.White;
-        }
-        private void btnNoBook_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoBook.ForeColor = Color.Yellow;
-        }
-        private void btnNoBook_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoBook.ForeColor = Color.White;
-        }
-
-        private void btnNoClock_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoClock.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoClock_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoClock.ForeColor = Color.White;
-        }
-
-        private void btnNoNeedle_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoNeedle.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoNeedle_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoNeedle.ForeColor = Color.White;
-        }
-
-        private void btnSiNeedle_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiNeedle.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiNeedle_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiNeedle.ForeColor = Color.White;
-        }
-
-        private void btnNoMap_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoMap.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoMap_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoMap.ForeColor = Color.White;
-        }
-
-        private void btnSiMap_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiMap.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiMap_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiMap.ForeColor = Color.White;
-        }
-
-        private void btnNoPiano_MouseEnter(object sender, EventArgs e)
-        {
-            btnNoPiano.ForeColor = Color.Yellow;
-        }
-
-        private void btnNoPiano_MouseLeave(object sender, EventArgs e)
-        {
-            btnNoPiano.ForeColor = Color.White;
-        }
-
-        private void btnSiPiano_MouseEnter(object sender, EventArgs e)
-        {
-            btnSiPiano.ForeColor = Color.Yellow;
-        }
-
-        private void btnSiPiano_MouseLeave(object sender, EventArgs e)
-        {
-            btnSiPiano.ForeColor = Color.White;
-        }
-
-        private void pnlClock_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlClock.ClientSize.Width - grosor,
-                    pnlClock.ClientSize.Height - grosor);
-            }
-        }
-
-        private void pnlBook_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlBook.ClientSize.Width - grosor,
-                    pnlBook.ClientSize.Height - grosor);
-            }
-        }
-
-        private void pnlPiano_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlPiano.ClientSize.Width - grosor,
-                    pnlPiano.ClientSize.Height - grosor);
-            }
-        }
-
-        private void pnlNeedle_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlNeedle.ClientSize.Width - grosor,
-                    pnlNeedle.ClientSize.Height - grosor);
-            }
-        }
-
-        private void pnlMap_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlMap.ClientSize.Width - grosor,
-                    pnlMap.ClientSize.Height - grosor);
-            }
-        }
-
-        private void btnFailContinuar_Click(object sender, EventArgs e)
-        {
-            _form.MostrarUserControl(new MenuUserControl());
-        }
-
-        private void pnlFail_Paint(object sender, PaintEventArgs e)
-        {
-            int grosor = 3;
-            Color colorBorde = Color.White;
-
-            using (Pen pen = new Pen(colorBorde, grosor))
-            {
-                int offset = grosor / 2;
-                e.Graphics.DrawRectangle(pen,
-                    offset,
-                    offset,
-                    pnlFail.ClientSize.Width - grosor,
-                    pnlFail.ClientSize.Height - grosor);
-            }
-        }
-
-        private void btnIntentar_Click(object sender, EventArgs e)
-        {
-            pnlFail.Visible = false;
-        }
-
-        private void btnSeguir_Click(object sender, EventArgs e)
-        {
-            _form.MostrarUserControl(new JugarUserControl());
-        }
-
-        private void btnFailContinuar_MouseEnter(object sender, EventArgs e)
-        {
-            btnFailContinuar.ForeColor = Color.Yellow;
-        }
-
-        private void btnFailContinuar_MouseLeave(object sender, EventArgs e)
-        {
-            btnFailContinuar.ForeColor = Color.White;
-        }
-
-        private void btnIntentar_MouseEnter(object sender, EventArgs e)
-        {
-            btnIntentar.ForeColor = Color.Yellow;
-        }
-
-        private void btnIntentar_MouseLeave(object sender, EventArgs e)
-        {
-            btnIntentar.ForeColor = Color.White;
-        }
-
-        private void btnSeguir_MouseEnter(object sender, EventArgs e)
-        {
-            btnSeguir.ForeColor = Color.Yellow;
-        }
-
-        private void btnSeguir_MouseLeave(object sender, EventArgs e)
-        {
-            btnSeguir.ForeColor = Color.White;
-        }
-
-        private void btnVolver_MouseEnter(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor = Color.Yellow;
-        }
-
-        private void btnVolver_MouseLeave(object sender, EventArgs e)
-        {
-            btnVolver.ForeColor = Color.White;
+            EstadoDeJuego.TiempoRestanteGhost = segundosRestantes;
+            EstadoDeJuego.NivelGhostCompletado = true;
+            EstadoDeJuego.cantidadNivelesCompletados++;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Escape_Room_Digital.UserControls
         }
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            _form.MostrarUserControl(new JugarUserControl());
+            _form.MostrarUserControl(new InicioDelJuegoUserControl());
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

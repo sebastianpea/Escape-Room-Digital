@@ -7,6 +7,7 @@ namespace Escape_Room_Digital
         public Form1()
         {
             InitializeComponent();
+            this.Bounds = Screen.PrimaryScreen.Bounds;
             MostrarUserControl(new MenuUserControl());
             this.KeyPreview = true;
         }
@@ -34,18 +35,26 @@ namespace Escape_Room_Digital
                 menuUserControl.SetForm(this);
             else if (userControl is JugarUserControl jugarUserControl)
                 jugarUserControl.SetForm(this);
+            else if (userControl is GhostUserControl ghostUserControl) 
+                ghostUserControl.SetForm(this);
+            else if (userControl is ShortSkeletonUserControl shortSkeletonUserControl)
+                shortSkeletonUserControl.SetForm(this);
+            else if (userControl is AcertijoUserControl acertijoUserControl)  
+                acertijoUserControl.SetForm(this);
             else if (userControl is ConfiguracionUserControl configuracionUserControl)
                 configuracionUserControl.SetForm(this);
             else if (userControl is AdministradorUserControl administradorUserControl)
                 administradorUserControl.SetForm(this);
-            else if (userControl is AcertijoUserControl acertijoUserControl)
-                acertijoUserControl.SetForm(this);
             else if (userControl is CreditosUserControl creditosUserControl)
                 creditosUserControl.SetForm(this);
-
-            userControl.Dock = DockStyle.Fill;
+            else if (userControl is NerdUserControl2 nerdUserControl2)
+                nerdUserControl2.SetForm(this);
+            else if (userControl is InicioDelJuegoUserControl inicioUserControl)
+                inicioUserControl.SetForm(this);
+            else if(userControl is JefeFinalTenna jefeFinalTenna)
+                jefeFinalTenna.SetForm(this);
+                userControl.Dock = DockStyle.Fill;
             this.Controls.Add(userControl);
-
             if (userControl is IControlConMovimiento)
             {
                 this.Focus();

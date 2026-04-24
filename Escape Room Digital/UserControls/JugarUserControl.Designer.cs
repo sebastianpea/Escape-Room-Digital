@@ -36,67 +36,40 @@
             timerMoverIzquierda = new System.Windows.Forms.Timer(components);
             timerMoverArriba = new System.Windows.Forms.Timer(components);
             timerAnimacion = new System.Windows.Forms.Timer(components);
-            pbTurtle = new PictureBox();
-            pbNerd = new PictureBox();
-            pbShortSkeleton = new PictureBox();
+            pbTenna = new PictureBox();
+            pbRoulx = new PictureBox();
+            pbSpamton = new PictureBox();
             pbGhost = new PictureBox();
             pbJester = new PictureBox();
-            pnlDialogoNerd = new Panel();
-            btnOkNerd = new Button();
-            pictureBox4 = new PictureBox();
-            btnNoNerd = new Button();
-            btnSiNerd = new Button();
-            lblDialogoNerd = new Label();
-            pnlDialogoShortSkeleton = new Panel();
-            btnOkShortSkeleton = new Button();
-            pictureBox1 = new PictureBox();
-            btnNoShortSkeleton = new Button();
-            btnSiShortSkeleton = new Button();
-            lblDialogoShortSkeleton = new Label();
-            pnlDialogoGhost = new Panel();
-            btnOkGhost = new Button();
-            pictureBox3 = new PictureBox();
-            btnNoGhost = new Button();
-            btnSiGhost = new Button();
-            lblDialogoGhost = new Label();
-            pnlDialogoJester = new Panel();
-            btnOkJester = new Button();
-            pictureBox2 = new PictureBox();
-            btnNoJester = new Button();
-            btnSiJester = new Button();
-            lblDialogoJester = new Label();
-            pbNerdCloud = new PictureBox();
+            pbRoulxCloud = new PictureBox();
             pbTurtleCloud = new PictureBox();
             pbGhostCloud = new PictureBox();
             pbJesterCloud = new PictureBox();
-            pbShortSkeletonCloud = new PictureBox();
-            pnlTurtle = new Panel();
-            btnContinuarTurtle = new Button();
-            pbTurtlePanel = new PictureBox();
-            btnOkTurtle = new Button();
-            lblTurtle = new Label();
+            pbSpamtonCloud = new PictureBox();
             lblMision = new Label();
+            pnlDialogoUnico = new Panel();
+            lblNombreUnico = new Label();
+            btnContinuar = new Button();
+            pbRetratoPanel = new PictureBox();
+            btnNo = new Button();
+            btnSi = new Button();
+            lblTextoUnico = new Label();
+            timerAgrandar = new System.Windows.Forms.Timer(components);
+            timerCambioFondo = new System.Windows.Forms.Timer(components);
+            timerAnimacionTexto = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pbJugador).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbTurtle).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbNerd).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbShortSkeleton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbTenna).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRoulx).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSpamton).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbGhost).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbJester).BeginInit();
-            pnlDialogoNerd.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            pnlDialogoShortSkeleton.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            pnlDialogoGhost.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            pnlDialogoJester.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbNerdCloud).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbRoulxCloud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbTurtleCloud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbGhostCloud).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbJesterCloud).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbShortSkeletonCloud).BeginInit();
-            pnlTurtle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbTurtlePanel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbSpamtonCloud).BeginInit();
+            pnlDialogoUnico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbRetratoPanel).BeginInit();
             SuspendLayout();
             // 
             // btnVolver
@@ -116,7 +89,7 @@
             // 
             pbJugador.BackColor = Color.Transparent;
             pbJugador.Image = Properties.Resources.SkeletonWalk3;
-            pbJugador.Location = new Point(910, 750);
+            pbJugador.Location = new Point(890, 746);
             pbJugador.Name = "pbJugador";
             pbJugador.Size = new Size(131, 156);
             pbJugador.SizeMode = PictureBoxSizeMode.Zoom;
@@ -148,44 +121,44 @@
             timerAnimacion.Interval = 200;
             timerAnimacion.Tick += timerAnimacion_Tick;
             // 
-            // pbTurtle
+            // pbTenna
             // 
-            pbTurtle.BackColor = Color.Transparent;
-            pbTurtle.Image = Properties.Resources.TurtleIdle1;
-            pbTurtle.Location = new Point(914, 237);
-            pbTurtle.Name = "pbTurtle";
-            pbTurtle.Size = new Size(127, 167);
-            pbTurtle.SizeMode = PictureBoxSizeMode.Zoom;
-            pbTurtle.TabIndex = 2;
-            pbTurtle.TabStop = false;
+            pbTenna.BackColor = Color.Transparent;
+            pbTenna.Image = Properties.Resources.TennaDancingGangamStyle;
+            pbTenna.Location = new Point(877, 215);
+            pbTenna.Name = "pbTenna";
+            pbTenna.Size = new Size(176, 250);
+            pbTenna.SizeMode = PictureBoxSizeMode.Zoom;
+            pbTenna.TabIndex = 2;
+            pbTenna.TabStop = false;
             // 
-            // pbNerd
+            // pbRoulx
             // 
-            pbNerd.BackColor = Color.Transparent;
-            pbNerd.Image = Properties.Resources.NerdImage;
-            pbNerd.Location = new Point(266, 713);
-            pbNerd.Name = "pbNerd";
-            pbNerd.Size = new Size(131, 168);
-            pbNerd.SizeMode = PictureBoxSizeMode.Zoom;
-            pbNerd.TabIndex = 3;
-            pbNerd.TabStop = false;
+            pbRoulx.BackColor = Color.Transparent;
+            pbRoulx.Image = Properties.Resources.RoulxKaard;
+            pbRoulx.Location = new Point(405, 802);
+            pbRoulx.Name = "pbRoulx";
+            pbRoulx.Size = new Size(131, 168);
+            pbRoulx.SizeMode = PictureBoxSizeMode.Zoom;
+            pbRoulx.TabIndex = 3;
+            pbRoulx.TabStop = false;
             // 
-            // pbShortSkeleton
+            // pbSpamton
             // 
-            pbShortSkeleton.BackColor = Color.Transparent;
-            pbShortSkeleton.Image = Properties.Resources.ShortSkeletonImage;
-            pbShortSkeleton.Location = new Point(297, 304);
-            pbShortSkeleton.Name = "pbShortSkeleton";
-            pbShortSkeleton.Size = new Size(132, 160);
-            pbShortSkeleton.SizeMode = PictureBoxSizeMode.Zoom;
-            pbShortSkeleton.TabIndex = 4;
-            pbShortSkeleton.TabStop = false;
+            pbSpamton.BackColor = Color.Transparent;
+            pbSpamton.Image = Properties.Resources.SpamtonStill;
+            pbSpamton.Location = new Point(206, 300);
+            pbSpamton.Name = "pbSpamton";
+            pbSpamton.Size = new Size(128, 160);
+            pbSpamton.SizeMode = PictureBoxSizeMode.Zoom;
+            pbSpamton.TabIndex = 4;
+            pbSpamton.TabStop = false;
             // 
             // pbGhost
             // 
             pbGhost.BackColor = Color.Transparent;
             pbGhost.Image = Properties.Resources.GhostImage;
-            pbGhost.Location = new Point(1533, 740);
+            pbGhost.Location = new Point(1393, 798);
             pbGhost.Name = "pbGhost";
             pbGhost.Size = new Size(146, 172);
             pbGhost.SizeMode = PictureBoxSizeMode.Zoom;
@@ -195,7 +168,7 @@
             // pbJester
             // 
             pbJester.BackColor = Color.Transparent;
-            pbJester.Image = Properties.Resources.ClownImage;
+            pbJester.Image = Properties.Resources.Jevil;
             pbJester.Location = new Point(1568, 304);
             pbJester.Name = "pbJester";
             pbJester.Size = new Size(146, 149);
@@ -203,315 +176,17 @@
             pbJester.TabIndex = 6;
             pbJester.TabStop = false;
             // 
-            // pnlDialogoNerd
+            // pbRoulxCloud
             // 
-            pnlDialogoNerd.Controls.Add(btnOkNerd);
-            pnlDialogoNerd.Controls.Add(pictureBox4);
-            pnlDialogoNerd.Controls.Add(btnNoNerd);
-            pnlDialogoNerd.Controls.Add(btnSiNerd);
-            pnlDialogoNerd.Controls.Add(lblDialogoNerd);
-            pnlDialogoNerd.Location = new Point(562, 740);
-            pnlDialogoNerd.Margin = new Padding(3, 3, 3, 20);
-            pnlDialogoNerd.Name = "pnlDialogoNerd";
-            pnlDialogoNerd.Size = new Size(781, 294);
-            pnlDialogoNerd.TabIndex = 7;
-            pnlDialogoNerd.Visible = false;
-            pnlDialogoNerd.Paint += pnlDialogoNerd_Paint;
-            // 
-            // btnOkNerd
-            // 
-            btnOkNerd.BackColor = SystemColors.ActiveCaptionText;
-            btnOkNerd.ForeColor = SystemColors.ButtonHighlight;
-            btnOkNerd.Location = new Point(335, 173);
-            btnOkNerd.Name = "btnOkNerd";
-            btnOkNerd.Size = new Size(150, 57);
-            btnOkNerd.TabIndex = 17;
-            btnOkNerd.Text = "Ok";
-            btnOkNerd.UseVisualStyleBackColor = false;
-            btnOkNerd.Visible = false;
-            btnOkNerd.Click += btnOkNerd_Click;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.BackColor = Color.Transparent;
-            pictureBox4.Image = Properties.Resources.NerdImage;
-            pictureBox4.Location = new Point(59, 20);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(115, 147);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 16;
-            pictureBox4.TabStop = false;
-            // 
-            // btnNoNerd
-            // 
-            btnNoNerd.BackColor = SystemColors.ActiveCaptionText;
-            btnNoNerd.ForeColor = SystemColors.ButtonHighlight;
-            btnNoNerd.Location = new Point(500, 173);
-            btnNoNerd.Name = "btnNoNerd";
-            btnNoNerd.Size = new Size(150, 57);
-            btnNoNerd.TabIndex = 2;
-            btnNoNerd.Text = "No";
-            btnNoNerd.UseVisualStyleBackColor = false;
-            btnNoNerd.Click += btnNoNerd_Click;
-            // 
-            // btnSiNerd
-            // 
-            btnSiNerd.BackColor = SystemColors.ActiveCaptionText;
-            btnSiNerd.ForeColor = SystemColors.ButtonHighlight;
-            btnSiNerd.Location = new Point(170, 173);
-            btnSiNerd.Name = "btnSiNerd";
-            btnSiNerd.Size = new Size(150, 57);
-            btnSiNerd.TabIndex = 1;
-            btnSiNerd.Text = "Si";
-            btnSiNerd.UseVisualStyleBackColor = false;
-            btnSiNerd.Click += btnSiNerd_Click;
-            // 
-            // lblDialogoNerd
-            // 
-            lblDialogoNerd.AutoSize = true;
-            lblDialogoNerd.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDialogoNerd.ForeColor = SystemColors.ButtonFace;
-            lblDialogoNerd.Location = new Point(223, 30);
-            lblDialogoNerd.Name = "lblDialogoNerd";
-            lblDialogoNerd.Size = new Size(103, 30);
-            lblDialogoNerd.TabIndex = 0;
-            lblDialogoNerd.Text = "label1";
-            // 
-            // pnlDialogoShortSkeleton
-            // 
-            pnlDialogoShortSkeleton.Controls.Add(btnOkShortSkeleton);
-            pnlDialogoShortSkeleton.Controls.Add(pictureBox1);
-            pnlDialogoShortSkeleton.Controls.Add(btnNoShortSkeleton);
-            pnlDialogoShortSkeleton.Controls.Add(btnSiShortSkeleton);
-            pnlDialogoShortSkeleton.Controls.Add(lblDialogoShortSkeleton);
-            pnlDialogoShortSkeleton.Location = new Point(562, 740);
-            pnlDialogoShortSkeleton.Margin = new Padding(3, 3, 3, 20);
-            pnlDialogoShortSkeleton.Name = "pnlDialogoShortSkeleton";
-            pnlDialogoShortSkeleton.Size = new Size(843, 294);
-            pnlDialogoShortSkeleton.TabIndex = 10;
-            pnlDialogoShortSkeleton.Visible = false;
-            pnlDialogoShortSkeleton.Paint += pnlDialogoShortSkeleton_Paint;
-            // 
-            // btnOkShortSkeleton
-            // 
-            btnOkShortSkeleton.BackColor = SystemColors.ActiveCaptionText;
-            btnOkShortSkeleton.ForeColor = SystemColors.ButtonHighlight;
-            btnOkShortSkeleton.Location = new Point(331, 211);
-            btnOkShortSkeleton.Name = "btnOkShortSkeleton";
-            btnOkShortSkeleton.Size = new Size(150, 57);
-            btnOkShortSkeleton.TabIndex = 19;
-            btnOkShortSkeleton.Text = "Ok";
-            btnOkShortSkeleton.UseVisualStyleBackColor = false;
-            btnOkShortSkeleton.Visible = false;
-            btnOkShortSkeleton.Click += btnOkShortSkeleton_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.ShortSkeletonImage;
-            pictureBox1.Location = new Point(109, 32);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(121, 152);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 16;
-            pictureBox1.TabStop = false;
-            // 
-            // btnNoShortSkeleton
-            // 
-            btnNoShortSkeleton.BackColor = SystemColors.ActiveCaptionText;
-            btnNoShortSkeleton.ForeColor = SystemColors.ButtonHighlight;
-            btnNoShortSkeleton.Location = new Point(526, 211);
-            btnNoShortSkeleton.Name = "btnNoShortSkeleton";
-            btnNoShortSkeleton.Size = new Size(150, 57);
-            btnNoShortSkeleton.TabIndex = 2;
-            btnNoShortSkeleton.Text = "No";
-            btnNoShortSkeleton.UseVisualStyleBackColor = false;
-            btnNoShortSkeleton.Click += btnNoShortSkeleton_Click;
-            // 
-            // btnSiShortSkeleton
-            // 
-            btnSiShortSkeleton.BackColor = SystemColors.ActiveCaptionText;
-            btnSiShortSkeleton.ForeColor = SystemColors.ButtonHighlight;
-            btnSiShortSkeleton.Location = new Point(144, 211);
-            btnSiShortSkeleton.Name = "btnSiShortSkeleton";
-            btnSiShortSkeleton.Size = new Size(141, 57);
-            btnSiShortSkeleton.TabIndex = 1;
-            btnSiShortSkeleton.Text = "Si";
-            btnSiShortSkeleton.UseVisualStyleBackColor = false;
-            btnSiShortSkeleton.Click += btnSiShortSkeleton_Click;
-            // 
-            // lblDialogoShortSkeleton
-            // 
-            lblDialogoShortSkeleton.AutoSize = true;
-            lblDialogoShortSkeleton.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDialogoShortSkeleton.ForeColor = SystemColors.ButtonFace;
-            lblDialogoShortSkeleton.Location = new Point(249, 48);
-            lblDialogoShortSkeleton.Name = "lblDialogoShortSkeleton";
-            lblDialogoShortSkeleton.Size = new Size(103, 30);
-            lblDialogoShortSkeleton.TabIndex = 0;
-            lblDialogoShortSkeleton.Text = "label1";
-            // 
-            // pnlDialogoGhost
-            // 
-            pnlDialogoGhost.Controls.Add(btnOkGhost);
-            pnlDialogoGhost.Controls.Add(pictureBox3);
-            pnlDialogoGhost.Controls.Add(btnNoGhost);
-            pnlDialogoGhost.Controls.Add(btnSiGhost);
-            pnlDialogoGhost.Controls.Add(lblDialogoGhost);
-            pnlDialogoGhost.Location = new Point(562, 740);
-            pnlDialogoGhost.Margin = new Padding(3, 3, 3, 20);
-            pnlDialogoGhost.Name = "pnlDialogoGhost";
-            pnlDialogoGhost.Size = new Size(837, 286);
-            pnlDialogoGhost.TabIndex = 8;
-            pnlDialogoGhost.Visible = false;
-            pnlDialogoGhost.Paint += pnlDialogoGhost_Paint;
-            // 
-            // btnOkGhost
-            // 
-            btnOkGhost.BackColor = SystemColors.ActiveCaptionText;
-            btnOkGhost.ForeColor = SystemColors.ButtonHighlight;
-            btnOkGhost.Location = new Point(355, 179);
-            btnOkGhost.Name = "btnOkGhost";
-            btnOkGhost.Size = new Size(150, 57);
-            btnOkGhost.TabIndex = 20;
-            btnOkGhost.Text = "Ok";
-            btnOkGhost.UseVisualStyleBackColor = false;
-            btnOkGhost.Visible = false;
-            btnOkGhost.Click += btnOkGhost_Click;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.BackColor = Color.Transparent;
-            pictureBox3.Image = Properties.Resources.GhostImage;
-            pictureBox3.Location = new Point(34, 10);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(157, 163);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 16;
-            pictureBox3.TabStop = false;
-            // 
-            // btnNoGhost
-            // 
-            btnNoGhost.BackColor = SystemColors.ActiveCaptionText;
-            btnNoGhost.ForeColor = SystemColors.ButtonFace;
-            btnNoGhost.Location = new Point(524, 179);
-            btnNoGhost.Name = "btnNoGhost";
-            btnNoGhost.Size = new Size(149, 57);
-            btnNoGhost.TabIndex = 2;
-            btnNoGhost.Text = "No";
-            btnNoGhost.UseVisualStyleBackColor = false;
-            btnNoGhost.Click += btnNoGhost_Click;
-            // 
-            // btnSiGhost
-            // 
-            btnSiGhost.BackColor = SystemColors.ActiveCaptionText;
-            btnSiGhost.ForeColor = SystemColors.ButtonHighlight;
-            btnSiGhost.Location = new Point(187, 179);
-            btnSiGhost.Name = "btnSiGhost";
-            btnSiGhost.Size = new Size(149, 57);
-            btnSiGhost.TabIndex = 1;
-            btnSiGhost.Text = "Si";
-            btnSiGhost.UseVisualStyleBackColor = false;
-            btnSiGhost.Click += btnSiGhost_Click;
-            // 
-            // lblDialogoGhost
-            // 
-            lblDialogoGhost.AutoSize = true;
-            lblDialogoGhost.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDialogoGhost.ForeColor = SystemColors.ButtonFace;
-            lblDialogoGhost.Location = new Point(239, 29);
-            lblDialogoGhost.Name = "lblDialogoGhost";
-            lblDialogoGhost.Size = new Size(103, 30);
-            lblDialogoGhost.TabIndex = 0;
-            lblDialogoGhost.Text = "label1";
-            // 
-            // pnlDialogoJester
-            // 
-            pnlDialogoJester.BackColor = SystemColors.ActiveCaptionText;
-            pnlDialogoJester.BorderStyle = BorderStyle.FixedSingle;
-            pnlDialogoJester.Controls.Add(btnOkJester);
-            pnlDialogoJester.Controls.Add(pictureBox2);
-            pnlDialogoJester.Controls.Add(btnNoJester);
-            pnlDialogoJester.Controls.Add(btnSiJester);
-            pnlDialogoJester.Controls.Add(lblDialogoJester);
-            pnlDialogoJester.Location = new Point(562, 740);
-            pnlDialogoJester.Margin = new Padding(3, 3, 3, 20);
-            pnlDialogoJester.Name = "pnlDialogoJester";
-            pnlDialogoJester.Size = new Size(843, 294);
-            pnlDialogoJester.TabIndex = 9;
-            pnlDialogoJester.Visible = false;
-            pnlDialogoJester.Paint += pnlDialogoJester_Paint;
-            // 
-            // btnOkJester
-            // 
-            btnOkJester.BackColor = SystemColors.ActiveCaptionText;
-            btnOkJester.ForeColor = SystemColors.ButtonHighlight;
-            btnOkJester.Location = new Point(366, 204);
-            btnOkJester.Name = "btnOkJester";
-            btnOkJester.Size = new Size(150, 57);
-            btnOkJester.TabIndex = 18;
-            btnOkJester.Text = "Ok";
-            btnOkJester.UseVisualStyleBackColor = false;
-            btnOkJester.Visible = false;
-            btnOkJester.Click += btnOkJester_Click;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = Properties.Resources.ClownImage;
-            pictureBox2.Location = new Point(110, 19);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(157, 152);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 16;
-            pictureBox2.TabStop = false;
-            // 
-            // btnNoJester
-            // 
-            btnNoJester.BackColor = SystemColors.ActiveCaptionText;
-            btnNoJester.ForeColor = SystemColors.ButtonHighlight;
-            btnNoJester.Location = new Point(546, 204);
-            btnNoJester.Name = "btnNoJester";
-            btnNoJester.Size = new Size(150, 57);
-            btnNoJester.TabIndex = 2;
-            btnNoJester.Text = "No";
-            btnNoJester.UseVisualStyleBackColor = false;
-            btnNoJester.Click += btnNoJester_Click;
-            // 
-            // btnSiJester
-            // 
-            btnSiJester.BackColor = SystemColors.ActiveCaptionText;
-            btnSiJester.ForeColor = SystemColors.ButtonHighlight;
-            btnSiJester.Location = new Point(174, 204);
-            btnSiJester.Name = "btnSiJester";
-            btnSiJester.Size = new Size(150, 57);
-            btnSiJester.TabIndex = 1;
-            btnSiJester.Text = "Si";
-            btnSiJester.UseVisualStyleBackColor = false;
-            btnSiJester.Click += btnSiJester_Click;
-            // 
-            // lblDialogoJester
-            // 
-            lblDialogoJester.AutoSize = true;
-            lblDialogoJester.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDialogoJester.ForeColor = SystemColors.ButtonFace;
-            lblDialogoJester.Location = new Point(285, 43);
-            lblDialogoJester.Name = "lblDialogoJester";
-            lblDialogoJester.Size = new Size(103, 30);
-            lblDialogoJester.TabIndex = 0;
-            lblDialogoJester.Text = "label1";
-            // 
-            // pbNerdCloud
-            // 
-            pbNerdCloud.BackColor = Color.Transparent;
-            pbNerdCloud.Image = Properties.Resources.InteractionCloudImage;
-            pbNerdCloud.Location = new Point(288, 615);
-            pbNerdCloud.Name = "pbNerdCloud";
-            pbNerdCloud.Size = new Size(75, 80);
-            pbNerdCloud.SizeMode = PictureBoxSizeMode.Zoom;
-            pbNerdCloud.TabIndex = 11;
-            pbNerdCloud.TabStop = false;
-            pbNerdCloud.Visible = false;
+            pbRoulxCloud.BackColor = Color.Transparent;
+            pbRoulxCloud.Image = Properties.Resources.InteractionCloudImage;
+            pbRoulxCloud.Location = new Point(435, 705);
+            pbRoulxCloud.Name = "pbRoulxCloud";
+            pbRoulxCloud.Size = new Size(75, 80);
+            pbRoulxCloud.SizeMode = PictureBoxSizeMode.Zoom;
+            pbRoulxCloud.TabIndex = 11;
+            pbRoulxCloud.TabStop = false;
+            pbRoulxCloud.Visible = false;
             // 
             // pbTurtleCloud
             // 
@@ -529,7 +204,7 @@
             // 
             pbGhostCloud.BackColor = Color.Transparent;
             pbGhostCloud.Image = Properties.Resources.InteractionCloudImage;
-            pbGhostCloud.Location = new Point(1568, 648);
+            pbGhostCloud.Location = new Point(1425, 699);
             pbGhostCloud.Name = "pbGhostCloud";
             pbGhostCloud.Size = new Size(78, 86);
             pbGhostCloud.SizeMode = PictureBoxSizeMode.Zoom;
@@ -549,78 +224,17 @@
             pbJesterCloud.TabStop = false;
             pbJesterCloud.Visible = false;
             // 
-            // pbShortSkeletonCloud
+            // pbSpamtonCloud
             // 
-            pbShortSkeletonCloud.BackColor = Color.Transparent;
-            pbShortSkeletonCloud.Image = Properties.Resources.InteractionCloudImage;
-            pbShortSkeletonCloud.Location = new Point(322, 221);
-            pbShortSkeletonCloud.Name = "pbShortSkeletonCloud";
-            pbShortSkeletonCloud.Size = new Size(75, 74);
-            pbShortSkeletonCloud.SizeMode = PictureBoxSizeMode.Zoom;
-            pbShortSkeletonCloud.TabIndex = 15;
-            pbShortSkeletonCloud.TabStop = false;
-            pbShortSkeletonCloud.Visible = false;
-            // 
-            // pnlTurtle
-            // 
-            pnlTurtle.Controls.Add(btnContinuarTurtle);
-            pnlTurtle.Controls.Add(pbTurtlePanel);
-            pnlTurtle.Controls.Add(btnOkTurtle);
-            pnlTurtle.Controls.Add(lblTurtle);
-            pnlTurtle.Location = new Point(562, 740);
-            pnlTurtle.Margin = new Padding(3, 3, 3, 20);
-            pnlTurtle.Name = "pnlTurtle";
-            pnlTurtle.Size = new Size(837, 286);
-            pnlTurtle.TabIndex = 17;
-            pnlTurtle.Visible = false;
-            pnlTurtle.Paint += pnlTurtle_Paint;
-            // 
-            // btnContinuarTurtle
-            // 
-            btnContinuarTurtle.BackColor = SystemColors.ActiveCaptionText;
-            btnContinuarTurtle.ForeColor = SystemColors.ButtonHighlight;
-            btnContinuarTurtle.Location = new Point(342, 192);
-            btnContinuarTurtle.Name = "btnContinuarTurtle";
-            btnContinuarTurtle.Size = new Size(173, 57);
-            btnContinuarTurtle.TabIndex = 19;
-            btnContinuarTurtle.Text = "Continuar";
-            btnContinuarTurtle.UseVisualStyleBackColor = false;
-            btnContinuarTurtle.Visible = false;
-            btnContinuarTurtle.Click += btnContinuarTurtle_Click;
-            // 
-            // pbTurtlePanel
-            // 
-            pbTurtlePanel.BackColor = Color.Transparent;
-            pbTurtlePanel.Image = Properties.Resources.TurtleIdle1;
-            pbTurtlePanel.Location = new Point(54, 32);
-            pbTurtlePanel.Name = "pbTurtlePanel";
-            pbTurtlePanel.Size = new Size(127, 167);
-            pbTurtlePanel.SizeMode = PictureBoxSizeMode.Zoom;
-            pbTurtlePanel.TabIndex = 18;
-            pbTurtlePanel.TabStop = false;
-            // 
-            // btnOkTurtle
-            // 
-            btnOkTurtle.BackColor = SystemColors.ActiveCaptionText;
-            btnOkTurtle.ForeColor = SystemColors.ButtonHighlight;
-            btnOkTurtle.Location = new Point(348, 192);
-            btnOkTurtle.Name = "btnOkTurtle";
-            btnOkTurtle.Size = new Size(149, 57);
-            btnOkTurtle.TabIndex = 1;
-            btnOkTurtle.Text = "OK";
-            btnOkTurtle.UseVisualStyleBackColor = false;
-            btnOkTurtle.Click += btnOkTurtle_Click;
-            // 
-            // lblTurtle
-            // 
-            lblTurtle.AutoSize = true;
-            lblTurtle.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTurtle.ForeColor = SystemColors.ButtonFace;
-            lblTurtle.Location = new Point(187, 32);
-            lblTurtle.Name = "lblTurtle";
-            lblTurtle.Size = new Size(103, 30);
-            lblTurtle.TabIndex = 0;
-            lblTurtle.Text = "label1";
+            pbSpamtonCloud.BackColor = Color.Transparent;
+            pbSpamtonCloud.Image = Properties.Resources.InteractionCloudImage;
+            pbSpamtonCloud.Location = new Point(236, 220);
+            pbSpamtonCloud.Name = "pbSpamtonCloud";
+            pbSpamtonCloud.Size = new Size(75, 74);
+            pbSpamtonCloud.SizeMode = PictureBoxSizeMode.Zoom;
+            pbSpamtonCloud.TabIndex = 15;
+            pbSpamtonCloud.TabStop = false;
+            pbSpamtonCloud.Visible = false;
             // 
             // lblMision
             // 
@@ -629,33 +243,124 @@
             lblMision.ForeColor = SystemColors.ButtonFace;
             lblMision.Location = new Point(32, 19);
             lblMision.Name = "lblMision";
-            lblMision.Size = new Size(417, 76);
+            lblMision.Size = new Size(307, 76);
             lblMision.TabIndex = 18;
-            lblMision.Text = "Objetivos:\r\n*Habla con la Tortuga ";
+            lblMision.Text = "Objetivos:\r\n*Habla con Tenna\r\n";
+            // 
+            // pnlDialogoUnico
+            // 
+            pnlDialogoUnico.Controls.Add(lblNombreUnico);
+            pnlDialogoUnico.Controls.Add(btnContinuar);
+            pnlDialogoUnico.Controls.Add(pbRetratoPanel);
+            pnlDialogoUnico.Controls.Add(btnNo);
+            pnlDialogoUnico.Controls.Add(btnSi);
+            pnlDialogoUnico.Controls.Add(lblTextoUnico);
+            pnlDialogoUnico.Location = new Point(533, 502);
+            pnlDialogoUnico.Margin = new Padding(3, 3, 3, 20);
+            pnlDialogoUnico.Name = "pnlDialogoUnico";
+            pnlDialogoUnico.Size = new Size(843, 294);
+            pnlDialogoUnico.TabIndex = 20;
+            pnlDialogoUnico.Visible = false;
+            // 
+            // lblNombreUnico
+            // 
+            lblNombreUnico.AutoSize = true;
+            lblNombreUnico.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombreUnico.ForeColor = SystemColors.ButtonFace;
+            lblNombreUnico.Location = new Point(39, 12);
+            lblNombreUnico.Name = "lblNombreUnico";
+            lblNombreUnico.Size = new Size(103, 30);
+            lblNombreUnico.TabIndex = 20;
+            lblNombreUnico.Text = "label1";
+            // 
+            // btnContinuar
+            // 
+            btnContinuar.BackColor = SystemColors.ActiveCaptionText;
+            btnContinuar.ForeColor = SystemColors.ButtonHighlight;
+            btnContinuar.Location = new Point(344, 210);
+            btnContinuar.Name = "btnContinuar";
+            btnContinuar.Size = new Size(174, 57);
+            btnContinuar.TabIndex = 19;
+            btnContinuar.Text = "Continuar";
+            btnContinuar.UseVisualStyleBackColor = false;
+            btnContinuar.Visible = false;
+            btnContinuar.Click += btnContinuar_Click;
+            // 
+            // pbRetratoPanel
+            // 
+            pbRetratoPanel.BackColor = Color.Transparent;
+            pbRetratoPanel.Image = Properties.Resources.SpamtonStill;
+            pbRetratoPanel.Location = new Point(39, 52);
+            pbRetratoPanel.Name = "pbRetratoPanel";
+            pbRetratoPanel.Size = new Size(121, 152);
+            pbRetratoPanel.SizeMode = PictureBoxSizeMode.Zoom;
+            pbRetratoPanel.TabIndex = 16;
+            pbRetratoPanel.TabStop = false;
+            // 
+            // btnNo
+            // 
+            btnNo.BackColor = SystemColors.ActiveCaptionText;
+            btnNo.ForeColor = SystemColors.ButtonHighlight;
+            btnNo.Location = new Point(540, 210);
+            btnNo.Name = "btnNo";
+            btnNo.Size = new Size(271, 57);
+            btnNo.TabIndex = 2;
+            btnNo.Text = "No";
+            btnNo.UseVisualStyleBackColor = false;
+            // 
+            // btnSi
+            // 
+            btnSi.BackColor = SystemColors.ActiveCaptionText;
+            btnSi.ForeColor = SystemColors.ButtonHighlight;
+            btnSi.Location = new Point(55, 210);
+            btnSi.Name = "btnSi";
+            btnSi.Size = new Size(258, 57);
+            btnSi.TabIndex = 1;
+            btnSi.Text = "Si";
+            btnSi.UseVisualStyleBackColor = false;
+            // 
+            // lblTextoUnico
+            // 
+            lblTextoUnico.Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTextoUnico.ForeColor = SystemColors.ButtonFace;
+            lblTextoUnico.Location = new Point(182, 52);
+            lblTextoUnico.Name = "lblTextoUnico";
+            lblTextoUnico.Size = new Size(629, 139);
+            lblTextoUnico.TabIndex = 0;
+            lblTextoUnico.Text = "label1";
+            // 
+            // timerAgrandar
+            // 
+            timerAgrandar.Interval = 30;
+            // 
+            // timerCambioFondo
+            // 
+            timerCambioFondo.Interval = 500;
+            // 
+            // timerAnimacionTexto
+            // 
+            timerAnimacionTexto.Interval = 30;
+            timerAnimacionTexto.Tick += timerAnimacionTexto_Tick;
             // 
             // JugarUserControl
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveCaptionText;
-            BackgroundImage = Properties.Resources.BackgroundGame;
+            BackgroundImage = Properties.Resources.TennaBackground;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(pnlDialogoUnico);
             Controls.Add(lblMision);
-            Controls.Add(pnlTurtle);
-            Controls.Add(pbShortSkeletonCloud);
+            Controls.Add(pbSpamtonCloud);
             Controls.Add(pbJesterCloud);
-            Controls.Add(pnlDialogoGhost);
-            Controls.Add(pnlDialogoJester);
-            Controls.Add(pnlDialogoShortSkeleton);
             Controls.Add(pbGhostCloud);
-            Controls.Add(pbTurtle);
+            Controls.Add(pbTenna);
             Controls.Add(pbTurtleCloud);
-            Controls.Add(pbNerdCloud);
-            Controls.Add(pnlDialogoNerd);
+            Controls.Add(pbRoulxCloud);
             Controls.Add(pbJugador);
             Controls.Add(pbJester);
             Controls.Add(pbGhost);
-            Controls.Add(pbShortSkeleton);
-            Controls.Add(pbNerd);
+            Controls.Add(pbSpamton);
+            Controls.Add(pbRoulx);
             Controls.Add(btnVolver);
             DoubleBuffered = true;
             Font = new Font("Determination Mono Web", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -663,31 +368,19 @@
             Name = "JugarUserControl";
             Size = new Size(1920, 1080);
             ((System.ComponentModel.ISupportInitialize)pbJugador).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbTurtle).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbNerd).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbShortSkeleton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbTenna).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRoulx).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSpamton).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbGhost).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbJester).EndInit();
-            pnlDialogoNerd.ResumeLayout(false);
-            pnlDialogoNerd.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            pnlDialogoShortSkeleton.ResumeLayout(false);
-            pnlDialogoShortSkeleton.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            pnlDialogoGhost.ResumeLayout(false);
-            pnlDialogoGhost.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            pnlDialogoJester.ResumeLayout(false);
-            pnlDialogoJester.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbNerdCloud).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbRoulxCloud).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbTurtleCloud).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbGhostCloud).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbJesterCloud).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbShortSkeletonCloud).EndInit();
-            pnlTurtle.ResumeLayout(false);
-            pnlTurtle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbTurtlePanel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbSpamtonCloud).EndInit();
+            pnlDialogoUnico.ResumeLayout(false);
+            pnlDialogoUnico.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbRetratoPanel).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -701,45 +394,26 @@
         private System.Windows.Forms.Timer timerMoverIzquierda;
         private System.Windows.Forms.Timer timerMoverArriba;
         private System.Windows.Forms.Timer timerAnimacion;
-        private PictureBox pbTurtle;
-        private PictureBox pbNerd;
-        private PictureBox pbShortSkeleton;
+        private PictureBox pbTenna;
+        private PictureBox pbRoulx;
+        private PictureBox pbSpamton;
         private PictureBox pbGhost;
         private PictureBox pbJester;
-        private Panel pnlDialogoNerd;
-        private Button btnNoNerd;
-        private Button btnSiNerd;
-        private Label lblDialogoNerd;
-        private Panel pnlDialogoGhost;
-        private Panel pnlDialogoJester;
-        private Button btnNoJester;
-        private Button btnSiJester;
-        private Label lblDialogoJester;
-        private Button btnNoGhost;
-        private Button btnSiGhost;
-        private Label lblDialogoGhost;
-        private Panel pnlDialogoShortSkeleton;
-        private Button btnNoShortSkeleton;
-        private Button btnSiShortSkeleton;
-        private Label lblDialogoShortSkeleton;
-        private PictureBox pbNerdCloud;
+        private PictureBox pbRoulxCloud;
         private PictureBox pbTurtleCloud;
         private PictureBox pbGhostCloud;
         private PictureBox pbJesterCloud;
-        private PictureBox pbShortSkeletonCloud;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
-        private Panel pnlTurtle;
-        private Button btnOkTurtle;
-        private Label lblTurtle;
-        private PictureBox pbTurtlePanel;
+        private PictureBox pbSpamtonCloud;
         private Label lblMision;
-        private Button btnOkNerd;
-        private Button btnOkShortSkeleton;
-        private Button btnOkGhost;
-        private Button btnOkJester;
-        private Button btnContinuarTurtle;
+        private Panel pnlDialogoUnico;
+        private Button btnContinuar;
+        private PictureBox pbRetratoPanel;
+        private Button btnNo;
+        private Button btnSi;
+        private Label lblTextoUnico;
+        private Label lblNombreUnico;
+        private System.Windows.Forms.Timer timerAgrandar;
+        private System.Windows.Forms.Timer timerCambioFondo;
+        private System.Windows.Forms.Timer timerAnimacionTexto;
     }
 }

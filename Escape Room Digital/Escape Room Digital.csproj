@@ -10,11 +10,40 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Audio\HipShop.mp3" />
+    <None Remove="Audio\Claps.wav" />
+    <None Remove="Audio\efecto_final.wav" />
+    <None Remove="Audio\HipShop.wav" />
+    <None Remove="Audio\JevilVoice.wav" />
+    <None Remove="Audio\Kick.wav" />
+    <None Remove="Audio\NapstablookVoice.wav" />
+    <None Remove="Audio\RoulxVoice.wav" />
+    <None Remove="Audio\SpamtonVoice.wav" />
+    <None Remove="Audio\TennaVoice.wav" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Audio\HipShop.mp3">
+    <Content Include="Audio\Claps.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\efecto_final.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\HipShop.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\JevilVoice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\Kick.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\NapstablookVoice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\SpamtonVoice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\TennaVoice.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -154,6 +183,12 @@
 
   <ItemGroup>
     <Folder Include="NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Audio\RoulxVoice.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

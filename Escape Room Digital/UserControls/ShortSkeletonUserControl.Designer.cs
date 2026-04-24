@@ -608,7 +608,7 @@
             // pbShortSkeleton
             // 
             pbShortSkeleton.BackColor = Color.Transparent;
-            pbShortSkeleton.Image = Properties.Resources.ShortSkeletonImage;
+            pbShortSkeleton.Image = Properties.Resources.RoulxTalking;
             pbShortSkeleton.Location = new Point(61, 32);
             pbShortSkeleton.Name = "pbShortSkeleton";
             pbShortSkeleton.Size = new Size(121, 152);
