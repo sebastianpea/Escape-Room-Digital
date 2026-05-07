@@ -15,32 +15,26 @@ namespace Escape_Room_Digital.UserControls
         private int tiempoRestante = 100;
         private List<(AcertijoTexto acertijo, Image expresion)> preguntas;
 
-        // ── Audio ──
         private IWavePlayer playerVoz;
         private AudioFileReader vozFile;
         private IWavePlayer playerMusica;
         private AudioFileReader musicaFile;
 
-        // ── Diálogos introductorios ──
         private List<Dialogo> listaDialogos;
         private int indiceDialogo = 0;
 
-        // ── Preguntas ──
         private int indicePregunta = 0;
         private int respuestasCorrectas = 0;
         private const int RespuestasParaGanar = 3;
 
-        // ── Animación de texto ──
         private string textoCompleto = "";
         private int letraActual = 0;
 
-        // ── Estado ──
         private bool enPreguntas = false;
 
-        // ── Fondo pendiente ──
         private Image _fondoPendiente;
 
-        // ── IEscenaGrafica ──
+
         public PictureBox Retrato => pbRetratoPanel;
         public Panel Dialogo => pnlDialogoUnico;
         public Control ControlGrafico => this;
@@ -97,7 +91,6 @@ namespace Escape_Room_Digital.UserControls
             catch { }
         }
 
-        // ── Constructor ──
         public JefeFinalTenna()
         {
             InitializeComponent();
@@ -116,7 +109,6 @@ namespace Escape_Room_Digital.UserControls
             IniciarEscena();
         }
 
-        // ── Escena introductoria ──
         private void IniciarEscena()
         {
             tiempoRestante = 300; 
@@ -161,7 +153,6 @@ namespace Escape_Room_Digital.UserControls
             timerAnimacionTexto.Start();
         }
 
-        // ── Preguntas ──
         private void MostrarPregunta()
         {
             if (indicePregunta >= preguntas.Count)
@@ -247,32 +238,10 @@ namespace Escape_Room_Digital.UserControls
                 txtBoxRespuesta.Visible = false;
                 btnValidar.Visible = false;
 
-                // Reintentar o salir
                 btnReintentar.Visible = true;
                 btnSalirFinal.Visible = true;
             }
         }
-
-        private string NormalizarTexto(string texto)
-        {
-            if (string.IsNullOrWhiteSpace(texto)) return "";
-
-            // Quitar acentos
-            string normalizado = texto.Normalize(NormalizationForm.FormD);
-            var sb = new StringBuilder();
-            foreach (char c in normalizado)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                    sb.Append(c);
-            }
-
-            return sb.ToString()
-                     .Normalize(NormalizationForm.FormC)
-                     .ToLower()
-                     .Trim();
-        }
-
-
         private void timerAnimacionTexto_Tick(object sender, EventArgs e)
         {
             if (letraActual < textoCompleto.Length)
