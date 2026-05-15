@@ -53,15 +53,16 @@ namespace Escape_Room_Digital
                 inicioUserControl.SetForm(this);
             else if(userControl is JefeFinalTenna jefeFinalTenna)
                 jefeFinalTenna.SetForm(this);
-                userControl.Dock = DockStyle.Fill;
+            userControl.Dock = DockStyle.Fill;
             this.Controls.Add(userControl);
+
             if (userControl is IControlConMovimiento)
             {
                 this.Focus();
                 this.Select();
             }
             else
-                userControl.Select();
+                userControl.Focus();
         }
     }
 }

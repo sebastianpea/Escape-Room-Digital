@@ -44,7 +44,7 @@
             label1.Location = new Point(47, 84);
             label1.Name = "label1";
             label1.Size = new Size(1192, 123);
-            label1.TabIndex = 0;
+            label1.TabIndex = 4;
             label1.Text = "Escape Room Digital";
             // 
             // btnJugar
@@ -55,10 +55,11 @@
             btnJugar.FlatAppearance.MouseOverBackColor = Color.Transparent;
             btnJugar.FlatStyle = FlatStyle.Flat;
             btnJugar.Font = new Font("Determination Mono Web", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnJugar.ForeColor = Color.Yellow;
             btnJugar.Location = new Point(47, 348);
             btnJugar.Name = "btnJugar";
             btnJugar.Size = new Size(267, 113);
-            btnJugar.TabIndex = 1;
+            btnJugar.TabIndex = 0;
             btnJugar.Text = "Jugar";
             btnJugar.UseVisualStyleBackColor = false;
             btnJugar.Click += btnJugar_Click;
@@ -75,7 +76,7 @@
             btnConfiguración.Location = new Point(47, 483);
             btnConfiguración.Name = "btnConfiguración";
             btnConfiguración.Size = new Size(581, 131);
-            btnConfiguración.TabIndex = 2;
+            btnConfiguración.TabIndex = 1;
             btnConfiguración.Text = "Configuración";
             btnConfiguración.UseVisualStyleBackColor = false;
             btnConfiguración.Click += btnConfiguración_Click;
@@ -92,7 +93,7 @@
             btnSalir.Location = new Point(47, 620);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(280, 118);
-            btnSalir.TabIndex = 3;
+            btnSalir.TabIndex = 2;
             btnSalir.Text = "Salir";
             btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
@@ -109,7 +110,7 @@
             btnAdministrador.Location = new Point(22, 1003);
             btnAdministrador.Name = "btnAdministrador";
             btnAdministrador.Size = new Size(292, 53);
-            btnAdministrador.TabIndex = 4;
+            btnAdministrador.TabIndex = 3;
             btnAdministrador.Text = "Administrador";
             btnAdministrador.UseVisualStyleBackColor = false;
             btnAdministrador.Click += btnAdministrador_Click;
