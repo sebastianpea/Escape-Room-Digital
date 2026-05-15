@@ -139,7 +139,7 @@
             // 
             pbJugador.BackColor = Color.Transparent;
             pbJugador.Image = Properties.Resources.SkeletonWalk3;
-            pbJugador.Location = new Point(1251, 896);
+            pbJugador.Location = new Point(1251, 897);
             pbJugador.Name = "pbJugador";
             pbJugador.Size = new Size(102, 167);
             pbJugador.SizeMode = PictureBoxSizeMode.Zoom;

@@ -167,7 +167,7 @@ namespace Escape_Room_Digital.UserControls
                     else if (objetoCercano is NPC_Jester)
                         pbRetratoPanel.Image = d.Hablante.Expresiones["Still"];
                     else if (objetoCercano is NPC_Turtle)
-                        pbRetratoPanel.Image = d.Hablante.Expresiones["Still"]; 
+                        pbRetratoPanel.Image = d.Hablante.Expresiones["Still"];
                 }
                 else
                 {
@@ -177,7 +177,7 @@ namespace Escape_Room_Digital.UserControls
             else
             {
                 if (d.Hablante.Expresiones.Count > 0)
-                { 
+                {
                     var listaExp = new List<Image>(d.Hablante.Expresiones.Values);
                     pbRetratoPanel.Image = listaExp[0];
                 }
@@ -391,13 +391,18 @@ namespace Escape_Room_Digital.UserControls
                 SiguienteDialogo();
             }
         }
-        
+
         private void btnVolver_Click(object sender, EventArgs e) => _form.MostrarUserControl(new MenuUserControl());
 
         public void IrANivel(UserControl nivel)
         {
             CerrarDialogo();
             _form.MostrarUserControl(nivel);
+        }
+
+        private void btnSi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

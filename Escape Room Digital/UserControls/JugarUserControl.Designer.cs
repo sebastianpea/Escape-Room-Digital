@@ -280,7 +280,7 @@
             btnContinuar.Location = new Point(344, 210);
             btnContinuar.Name = "btnContinuar";
             btnContinuar.Size = new Size(174, 57);
-            btnContinuar.TabIndex = 19;
+            btnContinuar.TabIndex = 2;
             btnContinuar.Text = "Continuar";
             btnContinuar.UseVisualStyleBackColor = false;
             btnContinuar.Visible = false;
@@ -315,9 +315,10 @@
             btnSi.Location = new Point(55, 210);
             btnSi.Name = "btnSi";
             btnSi.Size = new Size(258, 57);
-            btnSi.TabIndex = 1;
+            btnSi.TabIndex = 2;
             btnSi.Text = "Si";
             btnSi.UseVisualStyleBackColor = false;
+            btnSi.Click += btnSi_Click;
             // 
             // lblTextoUnico
             // 
